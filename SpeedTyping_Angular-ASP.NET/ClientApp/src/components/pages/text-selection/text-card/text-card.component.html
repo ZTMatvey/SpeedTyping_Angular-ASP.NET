@@ -1,0 +1,12 @@
+<h4 class="text-selection__item-text-name">
+    {{text?.title}}
+</h4>
+<p class="text-selection__content text-content">{{text?.partOfContent}}</p>
+<div class="buttons">
+    <st-common-button (clicked)="onClick()" class="text-selection__button">
+        Выбрать
+    </st-common-button>
+    <st-common-button (clicked)="onClick()" class="analytics-btn">
+        analytics
+    </st-common-button>
+</div>

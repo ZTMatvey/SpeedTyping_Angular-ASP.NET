@@ -1,0 +1,36 @@
+@import "../../../variables";
+
+.btn__wrapper {
+    display: inline-block;
+    cursor: pointer;
+
+    --btn-text-color: #000;
+    --btn-inverse-text-color: #fff;
+    --btn-bg-color: transparent;
+}
+.btn__body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    border: 1px var(--btn-text-color) solid;
+    user-select: none;
+    font-family: inherit;
+    text-transform: inherit;
+    color: var(--btn-text-color);
+    background-color: var(--btn-bg-color);
+
+    transition: all .1s ease;
+}
+.btn__active{
+    background-color: var(--btn-text-color);
+    color: var(--btn-inverse-text-color);
+}
+.normal-btn{
+    padding: 5px 10px;
+    font-size: 14px;
+}
+.small-btn{
+    padding: 2px 4px;
+    font-size: 8px;
+}

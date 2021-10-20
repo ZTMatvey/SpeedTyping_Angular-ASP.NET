@@ -1,0 +1,12 @@
+<div class="text-selection admin-panel__text-selection">
+    <div class="text-selection__body">
+        <div class="text-selection__wrapper">
+            <div class="text-selection__header">
+                <st-common-button [isNormalBg]="true" class="uppercased-and-normal-font">Добавить текст</st-common-button>
+            </div>
+            <div class="text-selection__main">
+                <st-admin-panel-text-card class="text-selection__item" [text]="text" *ngFor="let text of texts"></st-admin-panel-text-card>
+            </div>
+        </div>
+    </div>
+</div>
