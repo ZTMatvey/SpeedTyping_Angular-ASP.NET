@@ -1,0 +1,45 @@
+@import "../../variables";
+
+.text-selection {
+    margin: 50px 0;
+}
+.text-selection__body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+    min-height: 50vh;
+}
+.text-selection__wrapper {
+    width: 100%;
+    max-width: 800px;
+}
+.text-selection__header {
+    display: flex;
+    justify-content: center;
+}
+.text-selection__heading {
+    font-family: $headings-font;
+    font-weight: 700;
+    font-size: 35px;
+}
+.text-selection__main {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.text-selection__item {
+    flex: 1 1 calc(33.33% - 30px);
+    padding: 30px;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    background-color: var(--sub-bg-color);
+}

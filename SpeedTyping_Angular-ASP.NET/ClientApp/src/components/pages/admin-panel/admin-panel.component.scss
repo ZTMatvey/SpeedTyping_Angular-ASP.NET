@@ -1,0 +1,94 @@
+@import "../../variables";
+
+.admin-panel {
+    text-align: center;
+    padding: 40px;
+}
+
+.admin-panel__heading {
+    font-family: $headings-font;
+    color: var(--text-color);
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.admin-panel__text-selection {
+    margin: 20px 0;
+}
+
+.admin-panel__text-edit-button {
+    font-size: 10px;
+    padding: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.admin-panel__buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    border-bottom: var(--text-color) 1px solid;
+    padding-bottom: 15px;
+
+    & .admin-panel__button:first-child {
+        margin-left: 0;
+    }
+}
+.admin-panel__button {
+    margin-left: 10px;
+    text-transform: uppercase;
+    font-family: $main-font;
+}
+.admin-panel__button-active {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+.admin-panel__users {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    gap: 15px;
+}
+
+.admin-panel__user {
+    background-color: var(--sub-bg-color);
+    flex: 1 1 calc(25% - 45px);
+    padding: 30px;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & .user__info-block:first-child {
+        margin-top: 0;
+    }
+}
+
+.user__info-block {
+    margin-top: 15px;
+}
+
+.user__info-type {
+    font-family: $main-font;
+    color: var(--text-color);
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.user__info-content {
+    font-family: $main-font;
+    color: var(--text-color);
+    font-size: 16px;
+}
+
+.user__text {
+    font-family: $main-font;
+    color: var(--text-color);
+    font-size: 18px;
+}

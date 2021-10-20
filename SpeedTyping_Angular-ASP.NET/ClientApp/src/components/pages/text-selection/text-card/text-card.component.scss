@@ -1,0 +1,27 @@
+@import "../../../variables";
+
+.text-selection__item-text-name {
+    font-family: $headings-font;
+    font-weight: 700;
+    font-size: 20px;
+}
+.text-selection__button {
+    font-family:  $main-font;
+    text-transform: uppercase;
+}
+.text-selection__content{
+    font-family: $main-font;
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: center;
+}
+.analytics-btn{
+    font-family: $material-font;
+    margin-left: 5px;
+}
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
