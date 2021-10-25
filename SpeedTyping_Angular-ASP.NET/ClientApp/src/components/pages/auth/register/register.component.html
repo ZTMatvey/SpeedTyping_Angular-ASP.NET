@@ -3,9 +3,9 @@
         <div class="auth___container">
             <div class="auth__wrapper">
                 <h2 class="auth__heading">Регистрация</h2>
-                <form [formGroup]="service.formModel" #form
+                <form [formGroup]="service.formModel" #form="ngForm"
                     class="auth__form" autocomplete="off"
-                    (submit)="onSubmit()">
+                    (ngSubmit)="onSubmit()">
                     <input formControlName="UserName" class="auth__input-text" placeholder="Логин">
                     <input formControlName="Email" class="auth__input-text" placeholder="Почта">
                     <div formGroupName="Passwords" class="passwords">

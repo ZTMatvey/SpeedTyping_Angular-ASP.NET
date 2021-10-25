@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: "admin-panel",  component: AdminPanelComponent},
   { path: "**", redirectTo: "" },
 ];
-
+//accout -> canActivate:[AuthGuard]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

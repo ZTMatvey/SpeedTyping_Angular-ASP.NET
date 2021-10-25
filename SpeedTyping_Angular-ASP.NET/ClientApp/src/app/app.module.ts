@@ -8,6 +8,7 @@ import { ThemesModule } from 'src/themes/themes.module';
 import { ElementsModule } from 'src/components/elements/elements.module';
 import { ComponentsModule } from 'src/components/components.module';
 import { HttpClientModule } from '@angular/common/http';
+import { UserService } from 'src/components/pages/services/user.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     ComponentsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ UserService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

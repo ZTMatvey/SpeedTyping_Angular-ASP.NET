@@ -22,14 +22,14 @@ import { AdminPanelComponent } from './pages/admin-panel/admin-panel.component';
 import { TextsComponent } from './pages/admin-panel/texts/texts.component';
 import { UsersComponent } from './pages/admin-panel/users/users.component';
 import { AdminPanelTextCardComponent } from "./pages/admin-panel/texts/text-card/text-card.component";
-import { ReactiveFormsModule } from "@angular/forms";
-import { UserService } from "./pages/services/user.service";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { UserRegistrationService } from "./pages/services/user-registration.service";
 import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
     declarations: [ HeaderButtonsComponent, HeaderComponent, TextSelectionComponent, LoginComponent, RegisterComponent, LinkButtonComponent, PopupComponent, TextCardComponent, TextWriteComponent, TimerComponent, CpmMeterComponent, TextBoxComponent, TextSettingsComponent, TextStatisticComponent, AdminPanelComponent, TextsComponent, UsersComponent, AdminPanelTextCardComponent ],
-    imports: [ CommonModule, ElementsModule, ThemesModule, RouterModule, ReactiveFormsModule, HttpClientModule ],
-    providers: [ UserService ],
+    imports: [ CommonModule, ElementsModule, ThemesModule, RouterModule, ReactiveFormsModule, HttpClientModule, FormsModule ],
+    providers: [],
     exports: [ HeaderComponent ],
 })
 export class ComponentsModule{

@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { UserService } from "src/components/pages/services/user.service";
 import { ThemesDataService } from "src/themes/themes-data.service";
 
 @Component({
@@ -7,8 +8,7 @@ import { ThemesDataService } from "src/themes/themes-data.service";
     styleUrls: ["header-buttons.component.scss"]
 })
 export class HeaderButtonsComponent{
-    isAuthorized: boolean = false;
-    constructor(readonly themesData: ThemesDataService) {}
+    constructor(readonly themesData: ThemesDataService, public user: UserService) {}
 
     linkActive(){
         console.log("link active");

@@ -50,3 +50,7 @@ input{
     text-transform: uppercase;
     font-family: $main-font;
 }
+.disabled {
+    pointer-events: none;
+    opacity: 0.4;
+}

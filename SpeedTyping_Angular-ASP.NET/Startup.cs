@@ -1,3 +1,6 @@
+using System;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -7,9 +10,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using SpeedTyping.Domain;
 using SpeedTyping.Domain.Repositories.Abstract;
 using SpeedTyping.Domain.Repositories.EF;
+using SpeedTyping.Service;
 
 namespace SpeedTyping
 {
@@ -24,6 +29,7 @@ namespace SpeedTyping
 
         public void ConfigureServices(IServiceCollection services)
         {
+            Configuration.Bind("ApplicationSettings", new Config());
             services.AddDbContext<ApplicationDbContext>(x =>
                 x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -51,6 +57,26 @@ namespace SpeedTyping
                 options.Password.RequiredLength = 6;
                 options.SignIn.RequireConfirmedAccount = true;
             });
+
+            var key = Encoding.UTF8.GetBytes(Config.JWT_Secret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = false;
+                x.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -71,7 +97,9 @@ namespace SpeedTyping
                 app.UseSpaStaticFiles();
             }
 
+            app.UseAuthentication();
             app.UseRouting();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -80,8 +108,6 @@ namespace SpeedTyping
                     pattern: "{controller}/{action=Index}/{id?}");
             });
 
-            app.UseAuthentication();
-            app.UseAuthorization();
 
             app.UseSpa(spa =>
             {

@@ -3,28 +3,20 @@
         <div class="auth___container">
             <div class="auth__wrapper">
                 <h2 class="auth__heading">Вход</h2>
-                <form asp-area=""
-                      asp-controller="Account"
-                      asp-action="Login"
-                      method="post"
-                      asp-route-returnUrl="@ViewBag.returnUrl"
-                      class="auth__form"
-                      autocomplete="off">
-                    <div asp-validation-summary="All"></div>
-
-                    <input asp-for="UserName" class="auth__input-text" placeholder="Логин">
-
-                    <input asp-for="Password" class="auth__input-text" placeholder="Пароль">
-
+                <form class="auth__form"
+                      autocomplete="off"
+                      (ngSubmit)="onSubmit()"
+                      #form="ngForm">
+                    <input required #login="ngModel" name="login" [(ngModel)]="userLogin.userName" class="auth__input-text" placeholder="Логин">
+                    <input required #password="ngModel" name="password" [(ngModel)]="userLogin.password" type="password" class="auth__input-text" placeholder="Пароль">
                     <div class="auth__bottom">
                         <div class="auth__remember-me">
-                            <input asp-for="RememberMe" type="checkbox" class="auth__check-box">
+                            <input type="checkbox" class="auth__check-box">
                             <div class="auth__remember-me-text">
                                 Запомнить меня?
                             </div>
                         </div>
-                        <!-- <input type="submit" class="auth__button" value="Войти"> -->
-                        <st-common-button   class="auth-btn">Войти</st-common-button>
+                        <st-common-button [class.disabled]="form.invalid" class="auth-btn" (clicked)="onSubmitBtnClick()">Вход</st-common-button>
                     </div>
                 </form>
             </div>

@@ -1,43 +1,28 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private url: string = "/api/Account/Register";
-
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
-
-  formModel = this.formBuilder.group({
-    UserName: ['', Validators.required],
-    Email: ['', [Validators.required, Validators.email]],
-    Passwords: this.formBuilder.group({
-      Password: ['', [Validators.required, Validators.minLength(6)]],
-      ConfirmPassword: ['', Validators.required],
-    }, {validator: this.comparePasswords})
-  });
-  private comparePasswords(fg: FormGroup){
-    let confirmPasswordControl = fg.get("ConfirmPassword");
-    let errors = confirmPasswordControl?.errors;
-    if(!errors || "passwordMismatch" in errors){
-      let passwordControl = fg.get("Password");
-      if(passwordControl?.value !== confirmPasswordControl?.value)
-        confirmPasswordControl?.setErrors({passwordMismatch: true});
-      else confirmPasswordControl?.setErrors(null);
-    }
+  private url = "/api/Account/UserInfo";
+  userName: string = "";
+  isAuthorized: boolean = false;
+  constructor(private http: HttpClient) {
+    this.update();
+    this.updateAuthorized();
   }
-  register(){
-    if(!this.formModel.valid)
+
+  private updateAuthorized(){
+    this.isAuthorized = localStorage.getItem("token") !== null;
+  }
+  update() {
+    if(!localStorage.getItem("token"))
       return;
-    var body = {
-      UserName: this.formModel.value.UserName,
-      Email: this.formModel.value.Email,
-      Password: this.formModel.value.Passwords.Password,
-    };
-    this.http.get("/api/Account/Get");
-    this.http.get("/api/texts/all");
-    return this.http.post(this.url, body);
+    var token = localStorage.getItem("token");    
+    var header = new HttpHeaders({"Authorization": "Bearer " + token});
+    this.http.get(this.url, { headers: header }).subscribe((response: any)=> {
+      this.userName = response.userName;
+      }, error => {console.log(error);});
   }
 }
