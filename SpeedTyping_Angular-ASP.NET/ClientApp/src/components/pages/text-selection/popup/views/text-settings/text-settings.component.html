@@ -14,5 +14,5 @@
                 type="range" min="1" max="5" value="5"
                 (input)="updateSize()"/>
     </div>
-    <st-common-button [isNormalBg]="true" class="select-btn">Выбрать</st-common-button>
+    <st-common-button [isNormalBg]="true" class="select-btn" (clicked)="textChoosed()">Выбрать</st-common-button>
 </div>

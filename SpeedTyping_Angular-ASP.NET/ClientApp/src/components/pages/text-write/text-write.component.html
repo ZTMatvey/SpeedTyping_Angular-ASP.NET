@@ -2,8 +2,8 @@
     <div class="container">
         <div class="screen">
             <div class="text-write-body">
-                <st-text-write-text-box class="st-text-box" (currentlinechanged)="lineChanged($event)" (textchangedfirst)="textChangedFirst()" (newvalidcharacter)="newCorrectCharacter()" (textcompleted)="stopAll()"></st-text-write-text-box>
-                <div class="text-write__actual-string">{{currentLine}}</div>
+                <st-text-write-text-box [text]="text" #textBox class="st-text-box" (currentlinechanged)="lineChanged($event)" (textchangedfirst)="textChangedFirst()" (newvalidcharacter)="newCorrectCharacter()" (textcompleted)="stopAll()"></st-text-write-text-box>
+                <p class="text-write__actual-string">{{currentLine}}</p>
             </div>
             <div class="text-write__timer-info-wrapper">
                 <st-text-write-cpm-meter class="text-write__cpm-text" #cpmMeter></st-text-write-cpm-meter>

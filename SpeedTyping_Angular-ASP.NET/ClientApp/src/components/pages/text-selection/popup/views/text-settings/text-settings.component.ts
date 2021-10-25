@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TextService } from 'src/components/pages/services/text.service';
 import { ThemesDataService } from 'src/themes/themes-data.service';
 
@@ -14,12 +15,19 @@ export class TextSettingsComponent implements OnInit {
   currentTextModeLength: number = 0;
   currentTextModeName: string = "";
 
-  constructor(readonly themesData: ThemesDataService) { }
+  constructor(readonly themesData: ThemesDataService, private router: Router) { }
 
   ngOnInit(): void {
     this.slider = <HTMLInputElement>document.getElementById("popup-slider");
   }
-
+  textChoosed() {    
+    this.router.navigate(['text-write'], 
+    {
+        queryParams:{
+            "textId": this.text?.id
+        }
+    });
+  }
   configureTextData(text: TextService)
   {
     this.text = text;

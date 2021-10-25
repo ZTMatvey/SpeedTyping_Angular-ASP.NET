@@ -11,19 +11,8 @@ import { CommonButtonComponent } from '../common-button/common-button.component'
 export class LinkButtonComponent  extends CommonButtonComponent {
 
   @Input() link: string = "";
-  private isSameUrl: boolean = false;
 
-  constructor(private router: Router, themesData?: ThemesDataService) {
+  constructor(themesData?: ThemesDataService) {
     super(themesData);
-    router.events.subscribe((event: Event) => {
-        if (event instanceof NavigationEnd) {
-            let isCurrentSameUrl = this.link === event.url;
-            if(isCurrentSameUrl)
-                this.toggleClass();
-            else if(this.isSameUrl)
-                this.toggleClass();
-            this.isSameUrl = isCurrentSameUrl;
-        }
-    })
   }
 }

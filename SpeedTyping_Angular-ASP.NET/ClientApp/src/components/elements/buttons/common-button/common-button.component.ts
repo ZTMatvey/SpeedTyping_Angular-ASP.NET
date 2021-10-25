@@ -14,7 +14,7 @@ export class CommonButtonComponent implements OnInit, AfterViewInit{
     @Input() isSmall: boolean = false;
     @Input() isNormalBg: boolean = false;
 
-     mainColor?: string;
+    mainColor?: string;
     inverseColor?: string;
     @Output() clicked = new EventEmitter();
 
@@ -26,13 +26,6 @@ export class CommonButtonComponent implements OnInit, AfterViewInit{
         this.inverseColor = this.themesData?.subBgColor || "#fff";
         if(this.isNormalBg && this.themesData)
             this.inverseColor = this.themesData?.bgColor;
-    }
-
-    toggleClass()
-    {
-        if(this.body === undefined)
-            return;
-        this.body.nativeElement.classList.toggle("btn__active");
     }
 
     onClick(){

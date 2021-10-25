@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TextService } from '../../services/text.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { TextService } from '../../services/text.service';
   styleUrls: ['./text-box.component.scss']
 })
 export class TextBoxComponent implements OnInit {
+  @Input() text?: TextService;
   @Output() textchangedfirst = new EventEmitter();
   @Output() newvalidcharacter = new EventEmitter();
   @Output() textcompleted = new EventEmitter();
@@ -37,11 +38,12 @@ export class TextBoxComponent implements OnInit {
     this._textChanged = this.textChanged;
     this.textChanged(textBoxValue);
   }
-  setupLines(text: TextService)
+  private setupLines(text: TextService)
   {
     let subCounter = 0;
-    let startOfString = 0;
+    let startOfString = 0;    
     let inputString = text.content;
+    
     for (var i = 0; i < inputString.length; i++, subCounter++) {
       if (inputString[i] === '\n') {
         this.lines[this.lines.length++] = inputString.substring(startOfString, i - 1);
@@ -178,10 +180,12 @@ export class TextBoxComponent implements OnInit {
   }
   ngOnInit()
   {
-    let text = new TextService("Lorem", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis iusto ", "123");
-    this.setupLines(text);
+    this.textBox = <HTMLInputElement>document.getElementById("text-box");
+    this.setupText();
+  }
+  setupText() {    
+    this.setupLines(this.text!);
     this.currentLineChanged();
     this._textChanged = this.textChangedFirst;
-    this.textBox = <HTMLInputElement>document.getElementById("text-box");
   }
 }

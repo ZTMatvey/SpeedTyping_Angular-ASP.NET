@@ -1,12 +1,17 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SpeedTyping.Domain;
+using SpeedTyping.Domain.Repositories.Abstract;
+using SpeedTyping.Domain.Repositories.EF;
 
-namespace SpeedTyping_Angular_ASP.NET
+namespace SpeedTyping
 {
     public class Startup
     {
@@ -17,18 +22,36 @@ namespace SpeedTyping_Angular_ASP.NET
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-            // In production, the Angular files will be served from this directory
+            services.AddDbContext<ApplicationDbContext>(x =>
+                x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddControllersWithViews().
+                SetCompatibilityVersion(CompatibilityVersion.Version_3_0).
+                AddSessionStateTempDataProvider();
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-        }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            services.AddTransient<ITextRepository, EFTextRepository>();
+            services.AddTransient<DataManager>();
+            services.AddTransient<AccountManager>();
+            
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 6;
+                options.SignIn.RequireConfirmedAccount = true;
+            });
+        }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -38,7 +61,6 @@ namespace SpeedTyping_Angular_ASP.NET
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -58,11 +80,11 @@ namespace SpeedTyping_Angular_ASP.NET
                     pattern: "{controller}/{action=Index}/{id?}");
             });
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseSpa(spa =>
             {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
-
                 spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())

@@ -8,8 +8,13 @@ import { TextWriteComponent } from 'src/components/pages/text-write/text-write.c
 
 const routes: Routes = [
   { path: "",  component: TextSelectionComponent},
-  { path: "login",  component: LoginComponent},
-  { path: "register",  component: RegisterComponent},
+  {
+    path: "account",
+    children:[
+      { path: "login",  component: LoginComponent},
+      { path: "register",  component: RegisterComponent},
+    ]
+  },
   { path: "text-write",  component: TextWriteComponent},
   { path: "admin-panel",  component: AdminPanelComponent},
   { path: "**", redirectTo: "" },

@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { ThemesModule } from 'src/themes/themes.module';
 import { ElementsModule } from 'src/components/elements/elements.module';
 import { ComponentsModule } from 'src/components/components.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ComponentsModule } from 'src/components/components.module';
     AppRoutingModule,
     ElementsModule,
     ThemesModule,
-    ComponentsModule
+    ComponentsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

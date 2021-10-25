@@ -21,10 +21,10 @@
     background-color: var(--btn-bg-color);
 
     transition: all .1s ease;
-}
-.btn__active{
-    background-color: var(--btn-text-color);
-    color: var(--btn-inverse-text-color);
+    &:hover{
+        background-color: var(--btn-text-color);
+        color: var(--btn-inverse-text-color);
+    }
 }
 .normal-btn{
     padding: 5px 10px;

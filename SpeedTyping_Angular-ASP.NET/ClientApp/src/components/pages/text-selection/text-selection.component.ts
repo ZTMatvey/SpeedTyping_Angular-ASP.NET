@@ -9,17 +9,18 @@ import { TextCardComponent } from './text-card/text-card.component';
   templateUrl: './text-selection.component.html',
   styleUrls: ['./text-selection.component.scss']
 })
-export class TextSelectionComponent {
+export class TextSelectionComponent implements OnInit {
   @ViewChild("popup", {static: false})
   popup: PopupComponent | undefined;
-  Texts: TextService[];
+  Texts?: TextService[];
 
-  constructor(textsService: TextsService) {
-    this.Texts = textsService.Texts;
+  constructor(private textsService: TextsService) { }
+  ngOnInit(){
+    this.Texts = this.textsService.Texts;
   }
   openPopup(id: string)
   {
-    let text = this.Texts.find(i => i.id === id)!;
+    let text = this.Texts?.find(i => i.id === id)!;
     this.popup?.openPopup(text);
   }
 }
