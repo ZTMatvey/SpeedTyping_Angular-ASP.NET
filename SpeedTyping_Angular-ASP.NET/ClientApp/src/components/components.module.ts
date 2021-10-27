@@ -25,9 +25,10 @@ import { AdminPanelTextCardComponent } from "./pages/admin-panel/texts/text-card
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { UserRegistrationService } from "./pages/services/user-registration.service";
 import { HttpClientModule } from "@angular/common/http";
+import { CreateTextComponent } from './pages/admin-panel/create-text/create-text.component';
 
 @NgModule({
-    declarations: [ HeaderButtonsComponent, HeaderComponent, TextSelectionComponent, LoginComponent, RegisterComponent, LinkButtonComponent, PopupComponent, TextCardComponent, TextWriteComponent, TimerComponent, CpmMeterComponent, TextBoxComponent, TextSettingsComponent, TextStatisticComponent, AdminPanelComponent, TextsComponent, UsersComponent, AdminPanelTextCardComponent ],
+    declarations: [ HeaderButtonsComponent, HeaderComponent, TextSelectionComponent, LoginComponent, RegisterComponent, LinkButtonComponent, PopupComponent, TextCardComponent, TextWriteComponent, TimerComponent, CpmMeterComponent, TextBoxComponent, TextSettingsComponent, TextStatisticComponent, AdminPanelComponent, TextsComponent, UsersComponent, AdminPanelTextCardComponent, CreateTextComponent ],
     imports: [ CommonModule, ElementsModule, ThemesModule, RouterModule, ReactiveFormsModule, HttpClientModule, FormsModule ],
     providers: [],
     exports: [ HeaderComponent ],

@@ -1,5 +1,5 @@
 <div class="buttons-block" *ngIf="user.isAuthorized">
-    <st-common-button class="button">{{user.userName}}</st-common-button>
+    <st-common-button class="button" (clicked)="onProfileBtnClick()">{{user.userName}}</st-common-button>
 </div>
 <div class="buttons-block" *ngIf="!user.isAuthorized">
     <st-link-button [link]="'/account/login'" class="button">Войти</st-link-button>

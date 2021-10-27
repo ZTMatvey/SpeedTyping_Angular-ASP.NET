@@ -1,0 +1,26 @@
+<div class="text-edit">
+    <div class="container">
+        <div class="text-edit__body">
+            <div class="text-edit__wrapper">
+                <form method="post" autocomplete="off" #form="ngForm"
+                    [formGroup]="textCreateService.formModel" (ngSubmit)="onSubmit()">
+                    <h2 class="text-edit__heading">
+                        {{oldName}}
+                    </h2>
+                    <input formControlName="Title" placeholder="Название текста" class="text-edit__edit-title-input">
+                    <div class="text-edit__text-wrapper">
+                        <textarea formControlName="Content" placeholder="Содержание" class="text-edit__textarea" id="textEditTextarea"></textarea>
+                    </div>
+                    <div class="text-edit__text-wrapper">
+                        <div class="text-edit__character-edit-wrapper" #wrapper></div>
+                        <div class="text-edit__character-edit-buttons">    
+                            <st-common-button [isSmall]="true" class="select-btn uppercased-and-normal-font" (clicked)="addCharactersToReplace()">Добавить текст для изменения</st-common-button>
+                            <st-common-button [isSmall]="true" class="select-btn uppercased-and-normal-font" (clicked)="changeText()">Изменить</st-common-button>
+                         </div>
+                    </div>
+                    <st-common-button [isNormalBg]="true" (clicked)="onSubmitBtnClick()" class="save-btn uppercased-and-normal-font">Сохранить</st-common-button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

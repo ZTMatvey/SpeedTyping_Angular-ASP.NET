@@ -14,7 +14,7 @@ export class TextsComponent  {
     this.texts = textsService.Texts;
   }
 
-  addText(title: string, content: string, id: string)
+  addText(title: string, content: string, id: number)
   {
     let lengthOfPart = 200;
     let text = new TextService(title, content, id);

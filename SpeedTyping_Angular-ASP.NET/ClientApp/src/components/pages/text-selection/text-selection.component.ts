@@ -18,7 +18,7 @@ export class TextSelectionComponent implements OnInit {
   ngOnInit(){
     this.Texts = this.textsService.Texts;
   }
-  openPopup(id: string)
+  openPopup(id: number)
   {
     let text = this.Texts?.find(i => i.id === id)!;
     this.popup?.openPopup(text);

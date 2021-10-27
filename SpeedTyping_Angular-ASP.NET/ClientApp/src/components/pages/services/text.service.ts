@@ -1,5 +1,5 @@
 export class TextService{
-  constructor(title: string, content: string, id: string) {
+  constructor(title: string, content: string, id: number) {
     this.title = title;
     this.content = content;
     this.id = id;
@@ -7,5 +7,5 @@ export class TextService{
   title: string;
   partOfContent?: string;
   content: string;
-  id: string;
+  id: number;
 }

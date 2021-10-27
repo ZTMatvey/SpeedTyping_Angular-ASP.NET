@@ -5,9 +5,6 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class UserRegistrationService {
   private url: string = "/api/Account/Register";
-
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
-
   formModel = this.formBuilder.group({
     UserName: ['', Validators.required],
     Email: ['', [Validators.required, Validators.email]],
@@ -16,6 +13,9 @@ export class UserRegistrationService {
       ConfirmPassword: ['', Validators.required],
     }, {validator: this.comparePasswords})
   });
+
+  constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
+
   private comparePasswords(fg: FormGroup){
     let confirmPasswordControl = fg.get("ConfirmPassword");
     let errors = confirmPasswordControl?.errors;
@@ -34,8 +34,6 @@ export class UserRegistrationService {
       Email: this.formModel.value.Email,
       Password: this.formModel.value.Passwords.Password,
     };
-    this.http.get("/api/Account/Get");
-    this.http.get("/api/texts/all");
     return this.http.post(this.url, body);
   }
 }

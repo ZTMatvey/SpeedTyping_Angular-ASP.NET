@@ -5,11 +5,11 @@
     align-items: center;
 
     &.button:first-child{
-        margin-left: 0;
+        margin: 0;
     }
 }
 .button {
-    margin-left: 10px;
-    font-family:  $main-font;
+    margin-left: 5px;
+    font-family: $main-font;
     text-transform: uppercase;
 }

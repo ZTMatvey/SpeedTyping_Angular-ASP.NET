@@ -8,7 +8,7 @@ import { CommonButtonComponent } from '../common-button/common-button.component'
   templateUrl: './link-button.component.html',
   styleUrls: ['./link-button.component.scss', '../common-button/common-button.component.scss']
 })
-export class LinkButtonComponent  extends CommonButtonComponent {
+export class LinkButtonComponent extends CommonButtonComponent {
 
   @Input() link: string = "";
 

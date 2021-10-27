@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -7,22 +8,42 @@ import { Injectable } from '@angular/core';
 export class UserService {
   private url = "/api/Account/UserInfo";
   userName: string = "";
-  isAuthorized: boolean = false;
+  private _isAuthorized: boolean | null = null;
+  data?: User;
   constructor(private http: HttpClient) {
     this.update();
-    this.updateAuthorized();
   }
 
   private updateAuthorized(){
-    this.isAuthorized = localStorage.getItem("token") !== null;
+    this._isAuthorized = localStorage.getItem("token") !== null;
   }
-  update() {
-    if(!localStorage.getItem("token"))
+  public get isAuthorized() {
+    if(this._isAuthorized === null)
+      this.updateAuthorized();      
+    return this._isAuthorized;
+  }
+  async update() {
+    if (!localStorage.getItem("token"))
       return;
+    try {
+      this.data = await this.getUserInfo();
+      console.log(this.data.userName);
+      this.userName = this.data.userName;
+      this.updateAuthorized();
+    }
+    catch (err) {
+      console.log(err);
+      this.logout();
+    }
+  }
+  private getUserInfo(){
     var token = localStorage.getItem("token");    
     var header = new HttpHeaders({"Authorization": "Bearer " + token});
-    this.http.get(this.url, { headers: header }).subscribe((response: any)=> {
-      this.userName = response.userName;
-      }, error => {console.log(error);});
+    return this.http.get<User>(this.url, { headers: header }).toPromise();
+  }
+  logout()
+  {
+    localStorage.removeItem("token");
+    this.updateAuthorized();
   }
 }

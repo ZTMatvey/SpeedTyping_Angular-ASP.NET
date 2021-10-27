@@ -46,7 +46,7 @@ export class TextBoxComponent implements OnInit {
     
     for (var i = 0; i < inputString.length; i++, subCounter++) {
       if (inputString[i] === '\n') {
-        this.lines[this.lines.length++] = inputString.substring(startOfString, i - 1);
+        this.lines[this.lines.length++] = inputString.substring(startOfString, i);
         startOfString = i;
         subCounter = 0;
         continue;
@@ -61,7 +61,7 @@ export class TextBoxComponent implements OnInit {
       }
     }
     if (subCounter > 1)
-      this.lines[ this.lines.length++] = inputString.substring(startOfString, inputString.length);
+      this.lines[this.lines.length++] = inputString.substring(startOfString, inputString.length);
 
     for (var i = 0; i < this.lines.length; i++) {
       var startFlag = false;
@@ -181,6 +181,7 @@ export class TextBoxComponent implements OnInit {
   ngOnInit()
   {
     this.textBox = <HTMLInputElement>document.getElementById("text-box");
+    this.textBox.focus();
     this.setupText();
   }
   setupText() {    

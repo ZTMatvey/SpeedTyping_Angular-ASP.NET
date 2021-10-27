@@ -7,7 +7,9 @@ namespace SpeedTyping.Domain
         public readonly UserManager<ApplicationUser> UserManager;
         public readonly SignInManager<ApplicationUser> SignInManager;
 
-        public AccountManager(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        public AccountManager(
+            SignInManager<ApplicationUser> signInManager, 
+            UserManager<ApplicationUser> userManager)
         {
             SignInManager = signInManager;
             UserManager = userManager;

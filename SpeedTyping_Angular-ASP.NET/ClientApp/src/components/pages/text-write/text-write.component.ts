@@ -53,13 +53,15 @@ export class TextWriteComponent implements AfterViewInit, OnInit {
     });
     if(textId)
     {
-      this.text = this.textsService.getTextById(textId);      
+      this.text = this.textsService.getTextById(textId);       
       if(this.text)
         return;
     }
     this.toHomePage();
   }
   toHomePage(){
+    console.log("toHomePage");
+    
     this.router.navigate([""]);
   }
   ngOnInit(){

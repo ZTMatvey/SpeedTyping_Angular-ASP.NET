@@ -32,11 +32,11 @@ export class LoginComponent implements AfterViewInit, OnInit {
     this.userLogin.login().subscribe((response: any)=>{
       localStorage.setItem("token", response.token);
       this.router.navigateByUrl("");
+      this.user.update();
     },
     error=>{
 
     });
-    this.user.update();
   }
   onSubmitBtnClick(){
     this.form?.onSubmit(undefined!);

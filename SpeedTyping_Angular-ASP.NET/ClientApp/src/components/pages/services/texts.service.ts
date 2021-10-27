@@ -22,13 +22,16 @@ export class TextsService{
   {
       return this.texts;
   }
-  getTextById(id: string) {
-    return this.texts.find(t => t.id === id) ;
+  getTextById(id: number) {
+    for(let i = 0; i < this.texts.length; i++)
+      if(this.texts[i].id == id)
+        return this.texts[i];
+    return undefined;
   }
   private loadTexts(){
     return this.http.get(this.url);
   }
-  private addText(title: string, content: string, id: string)
+  private addText(title: string, content: string, id: number)
   {
     let lengthOfPart = 200;
     let text = new TextService(title, content, id);

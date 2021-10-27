@@ -29,7 +29,7 @@ export class RegisterComponent implements AfterViewInit, OnInit {
     this.textColor = themesData?.textColor || "#333";
   }
   onSubmit(){
-    this.service.register()?.subscribe();
+    this.service.register()?.subscribe(response=> this.router.navigateByUrl("/account/login"));
   }
   onSubmitBtnClick(){
     this.form?.onSubmit(undefined!);

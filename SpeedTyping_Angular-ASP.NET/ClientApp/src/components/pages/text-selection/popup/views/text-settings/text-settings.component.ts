@@ -20,7 +20,7 @@ export class TextSettingsComponent implements OnInit {
   ngOnInit(): void {
     this.slider = <HTMLInputElement>document.getElementById("popup-slider");
   }
-  textChoosed() {    
+  textChoosed() {     
     this.router.navigate(['text-write'], 
     {
         queryParams:{

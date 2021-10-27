@@ -1,0 +1,130 @@
+@import "../../../variables";
+
+.text-edit {
+    height: 100%;
+}
+
+.text-edit__body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.text-edit__wrapper {
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+}
+
+.text-edit__heading {
+    font-family: $headings-font;
+    color: var(--text-color);
+    font-weight: 700;
+    font-size: 30px;
+    margin-top: 30px;
+}
+
+.text-edit__text-wrapper {
+    margin-top: 30px;
+    width: 100%;
+    background-color: var(--sub-bg-color);
+    border-radius: 3px;
+    padding: 20px;
+    font-family: $main-font;
+    color: var(--text-color);
+}
+
+.text-edit__textarea {
+    font-family: $main-font;
+    color: var(--text-color);
+    resize: none;
+    outline: none;
+    min-height: 300px;
+    width: 100%;
+    overflow-y: auto;
+    background-color: transparent;
+    line-height: 15px;
+    font-size: 14px;
+    border: none;
+
+    &::-webkit-scrollbar{
+        background-color: transparent;
+    }
+    &::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        border: 1px solid var(--text-color);
+        border-radius: 5px;
+    }
+}
+
+.text-edit__edit-title-input {
+    margin-top: 30px;
+    font-family: $main-font;
+    color: var(--text-color);
+    background-color: transparent;
+    border-bottom: 1px var(--text-color) solid;
+    text-align: center;
+    font-size: 18px;
+    padding: 0 15px;
+
+    &:focus {
+        text-align: left;
+    }
+}
+
+.text-edit__save-changes-button {
+    margin: 30px 0;
+}
+
+.text-edit__character-edit {
+    margin-top: 10px;
+    font-family: $main-font;
+    color: var(--text-color);
+    background-color: transparent;
+    border-bottom: 1px var(--text-color) solid;
+    text-align: center;
+    padding: 0 5px;
+    
+    font-size: 14px;
+
+    min-width: 25px;
+    display: inline-block;
+}
+
+.text-edit__character-edit-block{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.text-edit__character-edit-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & .text-edit__character-edit-block:first-child {
+        margin-top: 0;
+    }
+}
+
+.text-edit__character-edit-arrow {
+    font-family: $material-font;
+    color: var(--text-color);
+    font-size: 15px;
+    padding: 0 10px;
+}
+
+.text-edit__character-edit-buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.save-btn{
+    margin-top: 20px;
+}
