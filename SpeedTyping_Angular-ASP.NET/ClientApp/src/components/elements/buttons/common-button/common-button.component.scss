@@ -28,6 +28,10 @@
         color: var(--btn-inverse-text-color);
     }
 }
+.active{
+    background-color: var(--btn-text-color);
+    color: var(--btn-inverse-text-color);
+}
 .normal-btn{
     padding: 5px 10px;
     font-size: 14px;

@@ -7,6 +7,7 @@ import { RegisterComponent } from 'src/components/pages/auth/register/register.c
 import { AuthGuard } from 'src/components/pages/guards/auth.guard';
 import { TextSelectionComponent } from 'src/components/pages/text-selection/text-selection.component';
 import { TextWriteComponent } from 'src/components/pages/text-write/text-write.component';
+import { UserProfileComponent } from 'src/components/pages/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: "",  component: TextSelectionComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: "register",  component: RegisterComponent }
     ]},
   { path: "text-write",  component: TextWriteComponent },
+  { path: "user-profile",  component: UserProfileComponent },
   { path: "admin-panel", canActivate: [AuthGuard], data: {permittedRoles:["admin"] }, component: AdminPanelComponent },
   { path: "admin-panel", canActivate: [AuthGuard], data: {permittedRoles:["admin"] },
     children:[

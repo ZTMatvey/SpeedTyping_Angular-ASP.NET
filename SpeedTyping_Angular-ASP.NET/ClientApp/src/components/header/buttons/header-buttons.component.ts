@@ -16,7 +16,4 @@ export class HeaderButtonsComponent {
     linkActive(){
         console.log("link active");
     }
-    onProfileBtnClick(){
-        this.user.logout();
-    }
 }

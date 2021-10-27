@@ -1,0 +1,92 @@
+<div class="personal-account">
+    <div class="container">
+        <div class="personal-account__content-wrapper">
+            <div class="personal-account__body">
+                <div class="personal-account__header">
+                    <div class="personal-account__header-element"
+                        #profileButton (click)="personalAccButtonClicked(0)">
+                        Профиль
+                    </div>
+                    <div class="personal-account__header-element"
+                        #progressButton (click)="personalAccButtonClicked(1)">
+                        Прогресс
+                    </div>
+                    <div class="personal-account__header-element"
+                        #personalizationButton (click)="personalAccButtonClicked(2)">
+                        Персонализация
+                    </div>
+                </div>
+                <div class="personal-account__main">
+                    <div class="personal-account__profile-blcok personal-account__block"
+                        #profileBlcok>
+                        <div class="personal-account__main-info-block">
+                            <div class="personal-account__main-info-block-title">
+                                Логин:
+                            </div>
+                            <input type="text" class="personal-account__main-info-block-content" value="@Model.UserName" />
+                        </div>
+                        <div class="personal-account__main-info-block">
+                            <div class="personal-account__main-info-block-title">
+                                Почта:
+                            </div>
+                            <input type="text" class="personal-account__main-info-block-content" value="@Model.Email" />
+                        </div>
+                        <div class="personal-account__block-footer">
+                            <div class="personal-account__block-footer-buttons">
+                                <st-common-button class="uppercased-and-normal-font">Сохранить изменения</st-common-button>
+                                <st-common-button class="uppercased-and-normal-font" (clicked)="logoutBtnClick()" [isSmall]="true">Выход</st-common-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="personal-account__progress-blcok personal-account__block"
+                        #progressBlcok>
+                        <div class="personal-account__global-info">
+                            <div class="personal-account__global-info-item">
+                                Всего времени: @statisticType.AllTimeMiliseconds.GetTimeInNormalForm()
+                            </div>
+                            <div class="personal-account__global-info-item">
+                                Средний CPM: @statisticType.AverageCPM
+                            </div>
+                            <div class="personal-account__global-info-item">
+                                Средний процент ошибок: @statisticType.AverageErrorPercent
+                            </div>
+                        </div>
+                                <div class="personal-account__text-statistics">
+                                        <div class="personal-account__name-block">
+                                            <div class="personal-account__text-name">
+                                                @typeTextStatistics.Key
+                                            </div>
+                                        </div>
+                                    <div class="personal-account__main-block">
+                                            <div class="personal-accout__concrete-text-statistics">
+                                                <div class="personal-accout__concrete-text-name">
+                                                    @textStatistics.TextTitle (@textStatistics.CountOfCorrects)
+                                                </div>
+                                                <div class="personal-accout__statistics-items">
+                                                    <div class="personal-accout__statistics-item">
+                                                        Напечатано раз: @textStatistics.AmountOfFinishedTexts
+                                                    </div>
+                                                    <div class="personal-accout__statistics-item">
+                                                        Лучшее CPM: @textStatistics.CharactersPerMinute
+                                                    </div>
+                                                    <div class="personal-accout__statistics-item">
+                                                        Лучшее время: @textStatistics.Miliseconds.GetTimeInNormalForm()
+                                                    </div>
+                                                    <div class="personal-accout__statistics-item">
+                                                        Лучший процент ошибок: @textStatistics.GetPercentOfErrors()
+                                                    </div>
+                                                </div>
+                                                <st-common-button class="button" [isSmall]="true">Очистить</st-common-button>
+                                            </div>
+                                    </div>
+                                </div>
+                    </div>
+                    <div class="personal-account__personalization-blcok"
+                        #personalizationBlcok>
+                        not available now
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
