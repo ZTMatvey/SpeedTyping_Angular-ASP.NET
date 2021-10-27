@@ -10,23 +10,18 @@ import { TextWriteComponent } from 'src/components/pages/text-write/text-write.c
 
 const routes: Routes = [
   { path: "",  component: TextSelectionComponent},
-  {
-    path: "account", redirectTo: ""
-  },
-  {
-    path: "account",
+  { path: "account", redirectTo: "" },
+  { path: "account",
     children:[
       { path: "login",  component: LoginComponent },
       { path: "register",  component: RegisterComponent }
-    ]
-  },
+    ]},
   { path: "text-write",  component: TextWriteComponent },
-  { path: "admin-panel", data: {permittedRoles:["admin"] }, component: AdminPanelComponent },
-  { path: "admin-panel", data: {permittedRoles:["admin"] },
+  { path: "admin-panel", canActivate: [AuthGuard], data: {permittedRoles:["admin"] }, component: AdminPanelComponent },
+  { path: "admin-panel", canActivate: [AuthGuard], data: {permittedRoles:["admin"] },
     children:[
       { path: "text-create", component: CreateTextComponent }
-    ]
-  },
+    ]},
   { path: "**", redirectTo: "" },
 ];
 //, canActivate: [AuthGuard]

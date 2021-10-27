@@ -32,6 +32,8 @@ namespace SpeedTyping.Domain.Repositories.EF
         public void DeleteTextByName(string name)
         {
             var textToDelete = context.Texts.FirstOrDefault(x => x.Title == name);
+            if (textToDelete == null)
+                return;
             context.Texts.Remove(textToDelete);
             context.SaveChanges();
         }

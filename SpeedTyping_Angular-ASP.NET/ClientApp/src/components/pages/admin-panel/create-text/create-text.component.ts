@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { TextCreateService } from '../../services/text-create.service';
+import { TextsService } from '../../services/texts.service';
 
 @Component({
   selector: 'app-create-text',
@@ -8,7 +10,7 @@ import { TextCreateService } from '../../services/text-create.service';
   styleUrls: ['./create-text.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class CreateTextComponent {
+export class CreateTextComponent implements OnInit {
   @ViewChild("wrapper", { static: false })
   wrapper?: ElementRef;
   @ViewChild("form", { static: false })
@@ -16,9 +18,12 @@ export class CreateTextComponent {
   oldName: string = "";
   private countOfReplacements = 0;
 
-  constructor(public textCreateService: TextCreateService) {  }
+  constructor(
+    public textCreateService: TextCreateService, 
+    private route: ActivatedRoute,
+    private textsService: TextsService) {  }
   onSubmit(){
-    this.textCreateService.create()?.subscribe(resp=> console.log(resp));
+    this.textCreateService.create()?.subscribe(resp=> this.textsService.update());
   }
   onSubmitBtnClick(){
     this.form?.onSubmit(undefined!);
@@ -44,5 +49,24 @@ export class CreateTextComponent {
         textareaContent = textareaContent.replace(regExp, to);
     }
     textarea!.value = textareaContent;
+  }
+  ngOnInit() {
+    let textId;
+    this.route.queryParams.subscribe((params: any)=>{
+      textId = params["id"];
+    });
+    if(textId)
+    {
+      var text = this.textsService.getTextById(textId);
+      if(!text)
+        return;
+    }
+    else return;
+    this.textCreateService.formModel.setValue({
+      Title: text!.title,
+      Content: text!.content,
+      Id: text!.id,
+    });
+    this.oldName = text!.title;
   }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SpeedTyping.Domain;
 using SpeedTyping.Model;
@@ -21,6 +22,8 @@ namespace SpeedTyping.Controllers
             _dataManager = dataManager;
         }
 
+        [HttpPost]
+        [Authorize(Roles = "admin")]
         [Route("CreateText")]
         public IActionResult CreateText(TextEditViewModel model)
         {
@@ -34,6 +37,14 @@ namespace SpeedTyping.Controllers
                 Id = model?.Id ?? default
             };
             _dataManager.Texts.SaveText(text);
+            return Ok();
+        }
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        [Route("DeleteText")]
+        public IActionResult DeleteText(DeleteTextViewModel model)
+        {
+            _dataManager.Texts.DeleteTextById(model.Id);
             return Ok();
         }
     }

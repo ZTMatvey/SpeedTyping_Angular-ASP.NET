@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { TextService } from 'src/components/pages/services/text.service';
+import { TextsService } from 'src/components/pages/services/texts.service';
 
 @Component({
   selector: 'st-admin-panel-text-card',
@@ -11,9 +13,18 @@ import { TextService } from 'src/components/pages/services/text.service';
 })
 export class AdminPanelTextCardComponent {
   @Input() text?: TextService;
-  @Output() selected = new EventEmitter();
 
-  onClick(){
-    this.selected.emit();
+  constructor(private router: Router, private textsService: TextsService) {  }
+  editBtnClick(){ 
+    this.router.navigate(['/admin-panel/text-create'], {
+        queryParams:{
+            "id": this.text?.id
+        }
+    });
+  }
+  deleteBtnClick(){
+    if(!this.text)
+      return;
+    this.textsService.deleteTextById(this.text?.id);
   }
 }

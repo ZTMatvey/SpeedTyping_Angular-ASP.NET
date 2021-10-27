@@ -29,6 +29,8 @@ export class UserService {
       this.data = await this.getUserInfo();
       console.log(this.data.userName);
       this.userName = this.data.userName;
+      console.log(this.getUserRole());
+      
       this.updateAuthorized();
     }
     catch (err) {
@@ -40,6 +42,28 @@ export class UserService {
     var token = localStorage.getItem("token");    
     var header = new HttpHeaders({"Authorization": "Bearer " + token});
     return this.http.get<User>(this.url, { headers: header }).toPromise();
+  }
+  isAllRolesMatch(rolesToMatch: string[]) {
+    var userRole = this.getUserRole();
+    var isMatch = true;
+    rolesToMatch.forEach(elem=> {      
+      if(userRole !== elem){
+        isMatch = false;
+        return;
+      }
+    })
+    return isMatch;
+  }
+  getUserRole(): string {
+    var token = localStorage.getItem("token");
+    if(!token)
+    {
+      this.logout();
+      return "";
+    }
+    var payLoad = JSON.parse(window.atob(token.split(".")[1]));
+    var userRole = payLoad.role;
+    return userRole;
   }
   logout()
   {

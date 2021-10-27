@@ -2,10 +2,10 @@
 <p class="text-selection__content text-content">{{text?.partOfContent}}</p>
 
 <div class="buttons">
-    <st-common-button (clicked)="onClick()" class="text-selection__button">
+    <st-common-button (clicked)="editBtnClick()" class="text-selection__button">
         Редактировать
     </st-common-button>
-    <st-common-button (clicked)="onClick()" [isSmall]="true" class="text-selection__button">
+    <st-common-button (clicked)="deleteBtnClick()" [isSmall]="true" class="text-selection__button">
         Удалить
     </st-common-button>
 </div>
