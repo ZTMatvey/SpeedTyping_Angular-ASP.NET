@@ -3,12 +3,14 @@
         <div class="auth___container">
             <div class="auth__wrapper">
                 <h2 class="auth__heading">Вход</h2>
-                <form class="auth__form"
+                <form [formGroup]="userLogin.formModel" class="auth__form"
                       autocomplete="off"
                       (ngSubmit)="onSubmit()"
                       #form="ngForm">
-                    <input required #login="ngModel" name="login" [(ngModel)]="userLogin.userName" class="auth__input-text" placeholder="Логин">
-                    <input required #password="ngModel" name="password" [(ngModel)]="userLogin.password" type="password" class="auth__input-text" placeholder="Пароль">
+                    <input formControlName="UserName" name="login" class="auth__input-text" placeholder="Логин">
+                    <span class="validation-error-msg" *ngIf="userLogin.formModel.get('UserName')?.touched && userLogin.formModel.get('UserName')?.errors?.required">Это поле обязательно для ввода</span>
+                    <input formControlName="Password" name="password" type="password" class="auth__input-text" placeholder="Пароль">
+                    <span class="validation-error-msg" *ngIf="userLogin.formModel.get('Password')?.touched && userLogin.formModel.get('Password')?.errors?.required">Это поле обязательно для ввода</span>
                     <div class="auth__bottom">
                         <div class="auth__remember-me">
                             <input type="checkbox" class="auth__check-box">

@@ -60,8 +60,6 @@ export class TextWriteComponent implements AfterViewInit, OnInit {
     this.toHomePage();
   }
   toHomePage(){
-    console.log("toHomePage");
-    
     this.router.navigate([""]);
   }
   ngOnInit(){
