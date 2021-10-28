@@ -24,7 +24,8 @@ export class TextSettingsComponent implements OnInit {
     this.router.navigate(['text-write'], 
     {
         queryParams:{
-            "textId": this.text?.id
+          "textId": this.text?.id,
+          "textSizeId": this.slider?.value ?? '5'
         }
     });
   }

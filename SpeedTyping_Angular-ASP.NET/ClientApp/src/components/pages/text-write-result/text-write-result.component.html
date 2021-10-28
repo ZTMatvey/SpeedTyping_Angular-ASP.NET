@@ -1,0 +1,22 @@
+<div class="text-write-restult__wrapper">
+    <div class="text-write">
+        <div class="container">
+            <div class="text-write__timer-info-wrapper">
+                <div class="text-write__result-text-title">{{this.text?.title}}</div>
+                <div class="text-write__info">
+                    Количество ошибок: {{this.textWriteInfo.lastTextInfo?.countOfErrors}} ({{this.textWriteInfo.lastTextInfo?.percentOfErrors}}%)
+                </div>
+                <div class="text-write__info">
+                    Количество верных вводов: {{this.textWriteInfo.lastTextInfo?.countOfCorrects}} ({{this.textWriteInfo.lastTextInfo?.percentOfCorrects}}%)
+                </div>
+                <div class="text-write__info">
+                    Время: {{this.textWriteInfo.lastTextInfo?.time}}
+                </div>
+                <div class="text-write__buttons">
+                    <st-common-button [isNormalBg]="true" class="text-write__button uppercased-and-normal-font">На главную</st-common-button>
+                    <st-common-button [isNormalBg]="true" [isSmall]="true" class="text-write__button uppercased-and-normal-font">Повторить</st-common-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

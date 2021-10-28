@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TextService } from '../../services/text.service';
+import { TextWriteInfo } from '../../text-write-result/text-write-info';
 
 @Component({
   selector: 'st-text-write-text-box',
@@ -7,10 +8,10 @@ import { TextService } from '../../services/text.service';
   styleUrls: ['./text-box.component.scss']
 })
 export class TextBoxComponent implements OnInit {
-  @Input() text?: TextService;
   @Output() textchangedfirst = new EventEmitter();
   @Output() newvalidcharacter = new EventEmitter();
   @Output() textcompleted = new EventEmitter();
+  @Output() error = new EventEmitter();
   @Output() currentlinechanged = new EventEmitter<string>();
   textBox?: HTMLInputElement;
 
@@ -42,7 +43,7 @@ export class TextBoxComponent implements OnInit {
   {
     let subCounter = 0;
     let startOfString = 0;    
-    let inputString = text.content;
+    let inputString = text.contentWithCorrectSize;
     
     for (var i = 0; i < inputString.length; i++, subCounter++) {
       if (inputString[i] === '\n') {
@@ -62,6 +63,8 @@ export class TextBoxComponent implements OnInit {
     }
     if (subCounter > 1)
       this.lines[this.lines.length++] = inputString.substring(startOfString, inputString.length);
+    
+    let totalCharacters = 0;
 
     for (var i = 0; i < this.lines.length; i++) {
       var startFlag = false;
@@ -88,6 +91,10 @@ export class TextBoxComponent implements OnInit {
               break;
       }
     }
+    for(let i = 0; i < this.lines.length; i++)
+      for(let j = 0; j < this.lines[i].length; j++)
+        totalCharacters++;
+    TextWriteInfo.lastTextInfo.setTotalCharacters(totalCharacters);
   }
   onTextChange()
   {
@@ -136,6 +143,7 @@ export class TextBoxComponent implements OnInit {
       {
         this.isIncorrectInput = true;
         this.errorInTextBox();
+        this.error.emit();
       }
     }
     if(isLengthMax && isTextBoxValid)
@@ -182,10 +190,9 @@ export class TextBoxComponent implements OnInit {
   {
     this.textBox = <HTMLInputElement>document.getElementById("text-box");
     this.textBox.focus();
-    this.setupText();
   }
-  setupText() {    
-    this.setupLines(this.text!);
+  setupText(text: TextService) {    
+    this.setupLines(text);
     this.currentLineChanged();
     this._textChanged = this.textChangedFirst;
   }

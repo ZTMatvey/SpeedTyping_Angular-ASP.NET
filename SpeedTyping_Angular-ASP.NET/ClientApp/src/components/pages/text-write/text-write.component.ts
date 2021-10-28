@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ThemesDataService } from 'src/themes/themes-data.service';
 import { TextService } from '../services/text.service';
 import { TextsService } from '../services/texts.service';
+import { TextWriteInfo } from '../text-write-result/text-write-info';
 import { CpmMeterComponent } from './cpm-meter/cpm-meter.component';
 import { TextBoxComponent } from './text-box/text-box.component';
 import { TimerComponent } from './timer/timer.component';
@@ -23,12 +24,14 @@ export class TextWriteComponent implements AfterViewInit, OnInit {
   textBox: TextBoxComponent | undefined;
   currentLine: string = "";
   text?: TextService;
+  textWriteInfo: TextWriteInfo;
 
   constructor(
     readonly themesData: ThemesDataService, 
     readonly route: ActivatedRoute,
     readonly textsService: TextsService,
     readonly router: Router) {
+      this.textWriteInfo = new TextWriteInfo();
   }
   lineChanged(newLine: any){
     this.currentLine = newLine;
@@ -38,13 +41,21 @@ export class TextWriteComponent implements AfterViewInit, OnInit {
     this.cpmMeter?.startCpmMeter(); 
   }
   newCorrectCharacter() {
+    this.textWriteInfo.countOfCorrects++;
+    console.log("correct");
     this.cpmMeter?.addCorrect();
+  }
+  error(){
+    this.textWriteInfo.countOfErrors++;
+    console.log("error");
   }
   stopAll()
   {
+    this.textWriteInfo.miliseconds = this.timer?.time ?? 0;
     this.timer?.stopTimer(); 
     this.cpmMeter?.stopCpmMeter();
     this.cpmMeter?.hideCpmMeter();
+    this.router.navigateByUrl("/text-write-result");
   }
   setupText() {
     let textId;
@@ -53,11 +64,32 @@ export class TextWriteComponent implements AfterViewInit, OnInit {
     });
     if(textId)
     {
-      this.text = this.textsService.getTextById(textId);       
-      if(this.text)
-        return;
+      this.textsService.getTextById(textId).then((text)=> this.checkText(text));
     }
-    this.toHomePage();
+  }
+  checkText(text: TextService | null) {
+    let textIsValid = 
+    text !== null && text !== undefined &&
+    text.content !== null && text.content !== undefined &&
+    text.title !== null && text.title !== undefined &&
+    text.id !== null && text.id !== undefined;
+    if(textIsValid)
+    {
+      let textSizeId;
+      this.route.queryParams.subscribe((params: any)=>{
+        textSizeId = params["textSizeId"];
+      });
+      textSizeId = textSizeId === null || textSizeId === undefined ? '5' : textSizeId;
+      this.configureText(text!, parseInt(textSizeId!));
+      this.textBox?.setupText(text!);
+    }
+    else
+      this.toHomePage();
+  }
+  configureText(text: TextService, textSizeId: number) {
+    this.text = text!;
+    this.text.textSizeId = textSizeId;
+    this.textWriteInfo.textId = this.text!.id;
   }
   toHomePage(){
     this.router.navigate([""]);

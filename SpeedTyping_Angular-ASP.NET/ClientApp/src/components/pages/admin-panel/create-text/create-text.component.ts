@@ -57,16 +57,17 @@ export class CreateTextComponent implements OnInit {
     });
     if(textId)
     {
-      var text = this.textsService.getTextById(textId);
-      if(!text)
-        return;
+      this.textsService.getTextById(textId).then(text=>{
+        this.textCreateService.formModel.setValue({
+          Title: text!.title,
+          Content: text!.content,
+          Id: text!.id,
+        });
+        this.oldName = text!.title;
+        if(!text)
+          return;
+      });
     }
     else return;
-    this.textCreateService.formModel.setValue({
-      Title: text!.title,
-      Content: text!.content,
-      Id: text!.id,
-    });
-    this.oldName = text!.title;
   }
 }

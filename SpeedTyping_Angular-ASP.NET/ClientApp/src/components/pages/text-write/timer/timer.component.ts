@@ -20,7 +20,6 @@ export class TimerComponent {
       if (this.seconds === 60) {
         this.minutes++;
         this.seconds = 0;
-        this.timePassed = 0;
       }
       this.miliseconds = this.timePassed % 100;
     }, 10);
@@ -28,5 +27,8 @@ export class TimerComponent {
   stopTimer()
   {
     clearInterval(this.interval);
+  }
+  get time(){
+    return this.timePassed * 10;
   }
 }
