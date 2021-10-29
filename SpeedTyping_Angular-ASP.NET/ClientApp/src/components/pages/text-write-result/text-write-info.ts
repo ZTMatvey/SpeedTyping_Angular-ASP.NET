@@ -25,10 +25,7 @@ export class TextWriteInfo {
     public get percentOfErrors(){
         return this.countOfErrors / this.countOfAllChars * 100;
     }
-    public get percentOfCorrects(){
-        console.log(this.countOfCorrects);
-        console.log(this.countOfAllChars);
-        
+    public get percentOfCorrects(){        
         return this.countOfCorrects / this.countOfAllChars * 100;
     }
     public get time(){

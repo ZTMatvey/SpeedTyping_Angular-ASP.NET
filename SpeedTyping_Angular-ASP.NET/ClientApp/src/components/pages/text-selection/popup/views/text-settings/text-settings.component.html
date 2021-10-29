@@ -5,9 +5,20 @@
     <div class="text-selection__item-text-name text-selection__popup-text-title" #title>
         {{text?.title || ""}}
     </div>
+    <div class="text-types" id="text-types">
+        <div (click)="selectTypeBtnClicked($event, 1)" class="text-type-element">
+            normal
+        </div>
+        <div (click)="selectTypeBtnClicked($event, 2)" class="text-type-element">
+            free
+        </div>
+        <div (click)="selectTypeBtnClicked($event, 3)" class="text-type-element">
+            normal
+        </div>
+    </div>
     <div class="text-selection__popup-text-size">
         <div class="text-selection__popup-character-count">
-                Размер текста: {{currentTextModeName}} - {{currentTextModeLength}}
+            Размер текста: {{currentTextModeName}} - {{currentTextModeLength}}
         </div>
         <input class="text-selection__popup-slider" id="popup-slider"
                 #slider

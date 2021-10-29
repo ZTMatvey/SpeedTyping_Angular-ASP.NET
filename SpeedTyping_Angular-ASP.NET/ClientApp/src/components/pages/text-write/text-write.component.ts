@@ -42,12 +42,10 @@ export class TextWriteComponent implements AfterViewInit, OnInit {
   }
   newCorrectCharacter() {
     this.textWriteInfo.countOfCorrects++;
-    console.log("correct");
     this.cpmMeter?.addCorrect();
   }
   error(){
     this.textWriteInfo.countOfErrors++;
-    console.log("error");
   }
   stopAll()
   {
@@ -76,12 +74,15 @@ export class TextWriteComponent implements AfterViewInit, OnInit {
     if(textIsValid)
     {
       let textSizeId;
+      let actionTypeId;
       this.route.queryParams.subscribe((params: any)=>{
         textSizeId = params["textSizeId"];
+        actionTypeId = params["actionTypeId"];
       });
       textSizeId = textSizeId === null || textSizeId === undefined ? '5' : textSizeId;
+      actionTypeId = actionTypeId === null || actionTypeId === undefined ? '1' : actionTypeId;
       this.configureText(text!, parseInt(textSizeId!));
-      this.textBox?.setupText(text!);
+      this.textBox?.setupText(text!, parseInt(actionTypeId));
     }
     else
       this.toHomePage();

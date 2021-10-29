@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TextService } from 'src/components/pages/services/text.service';
 import { ThemesDataService } from 'src/themes/themes-data.service';
@@ -8,24 +8,58 @@ import { ThemesDataService } from 'src/themes/themes-data.service';
   templateUrl: './text-settings.component.html',
   styleUrls: ['./text-settings.component.scss']
 })
-export class TextSettingsComponent implements OnInit {
+export class TextSettingsComponent implements OnInit, AfterViewInit {
   text?: TextService;
   slider: HTMLInputElement | undefined;
   private fullTextLength: number = 0;
   currentTextModeLength: number = 0;
   currentTextModeName: string = "";
+  private textTypes?: HTMLCollectionOf<Element>;
+  private lastElement?: HTMLElement;
+  private typeId = 1;
 
   constructor(readonly themesData: ThemesDataService, private router: Router) { }
 
   ngOnInit(): void {
     this.slider = <HTMLInputElement>document.getElementById("popup-slider");
   }
+  
+  ngAfterViewInit(){
+    let typesBlock = document.getElementById("text-types");
+    this.textTypes = typesBlock?.getElementsByClassName("text-type-element");
+    if(this.textTypes && this.textTypes.length > 0)
+    {
+      let length = this.textTypes.length;
+      let flexSizeInPercents = 100 / length;
+      let defaultSelected = this.textTypes[0] as HTMLElement;
+      defaultSelected.click();
+      for(let i = 0; i < length; i++)
+      {
+        let child = this.textTypes[i] as HTMLElement;
+        child.style.flex = `0 0 ${flexSizeInPercents}%`;
+      }
+    }
+  }
+  selectType(element: HTMLElement, typeId: number){
+    if(element === this.lastElement)
+      return;
+    this.typeId = typeId;    
+    element.classList.add("text-type-element-selected");
+    this.lastElement?.classList.remove("text-type-element-selected");
+    this.lastElement = element;
+  }
+  selectTypeBtnClicked(event: any, typeId: number){
+    
+    let target = event.target as HTMLElement;
+    this.selectType(target, typeId);
+  }
   textChoosed() {     
     this.router.navigate(['text-write'], 
     {
         queryParams:{
           "textId": this.text?.id,
-          "textSizeId": this.slider?.value ?? '5'
+          "textSizeId": this.slider?.value ?? '5',
+          "actionTypeId": this.typeId
         }
     });
   }
@@ -63,5 +97,4 @@ export class TextSettingsComponent implements OnInit {
             break;
     }
   }
-
 }

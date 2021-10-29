@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TextService } from '../../services/text.service';
 import { TextWriteInfo } from '../../text-write-result/text-write-info';
+import { ITypeActions } from './type-actions/abstract-type-actions';
+import { FreeTypeActions } from './type-actions/free-type-actions';
+import { NormalTypeActions } from './type-actions/normal-type-actions';
 
 @Component({
   selector: 'st-text-write-text-box',
@@ -13,6 +16,7 @@ export class TextBoxComponent implements OnInit {
   @Output() textcompleted = new EventEmitter();
   @Output() error = new EventEmitter();
   @Output() currentlinechanged = new EventEmitter<string>();
+  typeActions?: ITypeActions;
   textBox?: HTMLInputElement;
 
   lines: string[] = [];
@@ -24,7 +28,7 @@ export class TextBoxComponent implements OnInit {
   lastLine: string = "";
   _textChanged: any;
 
-  constructor() { 
+  constructor() {
     this.correctCharactersInLine = 75;
     this.maxCharactersInLine = 125; 
   }
@@ -33,11 +37,11 @@ export class TextBoxComponent implements OnInit {
       this.lines[this.currentLineIndex]
     );
   }
-  textChangedFirst(textBoxValue: string)
+  textChangedFirst(textBoxValue: string, isCharacterDeleted: boolean)
   {
     this.textchangedfirst.emit();
     this._textChanged = this.textChanged;
-    this.textChanged(textBoxValue);
+    this.textChanged(textBoxValue, isCharacterDeleted);
   }
   private setupLines(text: TextService)
   {
@@ -96,27 +100,38 @@ export class TextBoxComponent implements OnInit {
         totalCharacters++;
     TextWriteInfo.lastTextInfo.setTotalCharacters(totalCharacters);
   }
-  onTextChange()
+  onTextChange(event: any)
   {
+    let isCharacterDeleted = event.inputType === "deleteContentBackward";
     let textBoxValue = this.textBox!.value;
-    let difference = textBoxValue.length - this.currentMaxInputLength;
+    let difference = textBoxValue.length - this.lastLine.length;
     if(difference > 1)
     {
       this.textBox!.value = this.lastLine;
       return;
     }
     this.lastLine = textBoxValue;
-    this._textChanged(textBoxValue);
+    this._textChanged(textBoxValue, isCharacterDeleted);
   }
   onKeyup(event: any){
     if(event.keyCode === 13)
     {
       this.textBox!.value += ' ';
-      this.onTextChange();
+      this.onTextChange(event);      
     }
   }
-  textChanged(textBoxValue: string)
+  textChanged(textBoxValue: string, isCharacterDeleted: boolean)
   {
+    let isSizeMoreThanInCurrentLine = 
+      textBoxValue.length > this.lines[this.currentLineIndex].length;
+    let lastCharIsSpace = textBoxValue[textBoxValue.length - 1] == ' ';
+    if(isSizeMoreThanInCurrentLine && lastCharIsSpace)
+    {
+      let result = this.updateLine(this.lines[this.currentLineIndex], textBoxValue);
+      if(result === 0)
+        this.textCompleted();
+    }
+
     let isLengthMax = false;
     let isTextBoxValid = this.isTextBoxValid(textBoxValue);
     if(textBoxValue.length > this.currentMaxInputLength)
@@ -127,25 +142,15 @@ export class TextBoxComponent implements OnInit {
     if(isTextBoxValid && this.isIncorrectInput)
     {
       this.isIncorrectInput = false;
-      this.normalInTextBox();
+      this.typeActions?.allErrorsFixed();
     } 
     else if(!isTextBoxValid && !this.isIncorrectInput)
     {
-      let isSimSize = textBoxValue.length === this.lines[this.currentLineIndex].length + 1;
-      let lastCharIsSpace = textBoxValue[textBoxValue.length - 1] == ' ';
-      if(isSimSize && lastCharIsSpace)
-      {
-        let result = this.updateLine();
-        if(result === 0)
-          this.textCompleted();
-      }
-      else
-      {
-        this.isIncorrectInput = true;
-        this.errorInTextBox();
-        this.error.emit();
-      }
+      this.isIncorrectInput = true;
+      this.typeActions?.errorInTextBox();
     }
+    if(this.isIncorrectInput && !isCharacterDeleted)
+      this.error.emit();
     if(isLengthMax && isTextBoxValid)
       this.newvalidcharacter.emit();
   }
@@ -156,7 +161,9 @@ export class TextBoxComponent implements OnInit {
       return true;
     return false;
   }
-  updateLine(): number{
+  updateLine(normalLine: string, currentLine: string): number{
+    if(!this.typeActions!.canUpdateLine(normalLine, currentLine))
+      return -1;
     this.textBox!.value = "";
     this.currentLineIndex++;
     this.currentMaxInputLength = 0;
@@ -166,32 +173,23 @@ export class TextBoxComponent implements OnInit {
     return 1;
   }
   textCompleted(){
-    this.allCorrectInTextBox();
+    this.typeActions?.allCorrectInTextBox();
     this.textcompleted.emit();
-  }
-  errorInTextBox() {
-    this.removeAllNonMainClassesFromTextBox();
-    this.textBox!.classList.add('text-write__text-box-error');
-  }
-  normalInTextBox() {
-    this.removeAllNonMainClassesFromTextBox();
-    this.textBox!.classList.add('text-write__text-box-normal');
-  }
-  allCorrectInTextBox() {
-    this.removeAllNonMainClassesFromTextBox();
-    this.textBox!.classList.add('text-write__text-box-all-correct');
-  }
-  removeAllNonMainClassesFromTextBox(){
-    this.textBox!.classList.remove('text-write__text-box-normal');
-    this.textBox!.classList.remove('text-write__text-box-error');
-    this.textBox!.classList.remove('text-write__text-box-all-correct');
   }
   ngOnInit()
   {
     this.textBox = <HTMLInputElement>document.getElementById("text-box");
     this.textBox.focus();
   }
-  setupText(text: TextService) {    
+  setupText(text: TextService, actionTypeId: number) {    
+    switch(actionTypeId) {
+      case 2: 
+        this.typeActions = new FreeTypeActions(this.textBox!);
+        break;
+      case 1:
+      default:
+        this.typeActions = new NormalTypeActions(this.textBox!);
+    }
     this.setupLines(text);
     this.currentLineChanged();
     this._textChanged = this.textChangedFirst;
