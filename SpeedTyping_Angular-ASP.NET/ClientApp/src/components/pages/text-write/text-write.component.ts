@@ -24,15 +24,13 @@ export class TextWriteComponent implements AfterViewInit, OnInit {
   textBox: TextBoxComponent | undefined;
   currentLine: string = "";
   text?: TextService;
-  textWriteInfo: TextWriteInfo;
+  textWriteInfo?: TextWriteInfo;
 
   constructor(
     readonly themesData: ThemesDataService, 
     readonly route: ActivatedRoute,
     readonly textsService: TextsService,
-    readonly router: Router) {
-      this.textWriteInfo = new TextWriteInfo();
-  }
+    readonly router: Router) {  }
   lineChanged(newLine: any){
     this.currentLine = newLine;
   } 
@@ -41,15 +39,15 @@ export class TextWriteComponent implements AfterViewInit, OnInit {
     this.cpmMeter?.startCpmMeter(); 
   }
   newCorrectCharacter() {
-    this.textWriteInfo.countOfCorrects++;
+    this.textWriteInfo!.correctCharsCount++;
     this.cpmMeter?.addCorrect();
   }
   error(){
-    this.textWriteInfo.countOfErrors++;
+    this.textWriteInfo!.errorCharsCount++;
   }
   stopAll()
   {
-    this.textWriteInfo.miliseconds = this.timer?.time ?? 0;
+    this.textWriteInfo!.miliseconds = this.timer?.time ?? 0;
     this.timer?.stopTimer(); 
     this.cpmMeter?.stopCpmMeter();
     this.cpmMeter?.hideCpmMeter();
@@ -81,8 +79,12 @@ export class TextWriteComponent implements AfterViewInit, OnInit {
       });
       textSizeId = textSizeId === null || textSizeId === undefined ? '5' : textSizeId;
       actionTypeId = actionTypeId === null || actionTypeId === undefined ? '1' : actionTypeId;
-      this.configureText(text!, parseInt(textSizeId!));
-      this.textBox?.setupText(text!, parseInt(actionTypeId));
+      let numTextSize = parseInt(textSizeId);
+      let numActionTypeId = parseInt(actionTypeId);
+
+      this.textWriteInfo = new TextWriteInfo(text!.id, numTextSize, numActionTypeId);
+      this.configureText(text!, numTextSize);
+      this.textBox?.setupText(text!, numActionTypeId);
     }
     else
       this.toHomePage();
@@ -90,7 +92,7 @@ export class TextWriteComponent implements AfterViewInit, OnInit {
   configureText(text: TextService, textSizeId: number) {
     this.text = text!;
     this.text.textSizeId = textSizeId;
-    this.textWriteInfo.textId = this.text!.id;
+    this.textWriteInfo!.textId = this.text!.id;
   }
   toHomePage(){
     this.router.navigate([""]);

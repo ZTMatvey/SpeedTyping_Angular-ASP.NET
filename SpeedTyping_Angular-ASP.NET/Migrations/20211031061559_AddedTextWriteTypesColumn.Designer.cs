@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SpeedTyping.Model.Data;
 
 namespace SpeedTyping.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211031061559_AddedTextWriteTypesColumn")]
+    partial class AddedTextWriteTypesColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,14 +51,14 @@ namespace SpeedTyping.Migrations
                         new
                         {
                             Id = "dc086066-451d-4cb1-a1ad-933352eb82b4",
-                            ConcurrencyStamp = "23bb4c3a-8ece-4569-87bf-86119b89b149",
+                            ConcurrencyStamp = "a4f070e7-5e5c-49e4-a748-0652ae359f86",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "d4dad604-45e4-4ee7-b7b1-697bf7a623b2",
-                            ConcurrencyStamp = "b48e206d-1b12-4dc4-8683-d504de3282fa",
+                            ConcurrencyStamp = "e23675e2-cf17-4bcc-97ce-f122c7665352",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -227,11 +229,11 @@ namespace SpeedTyping.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TextWriteTypesInfoId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
-
-                    b.Property<int>("TypesInfoListId")
-                        .HasColumnType("int");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
@@ -247,6 +249,8 @@ namespace SpeedTyping.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("TextWriteTypesInfoId");
+
                     b.ToTable("AspNetUsers");
 
                     b.HasData(
@@ -254,34 +258,32 @@ namespace SpeedTyping.Migrations
                         {
                             Id = "215eedc8-7e86-46f6-88dc-6b052c4ed7b0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "20ba4b67-44bd-4928-ac05-2e25963dc52b",
+                            ConcurrencyStamp = "b2e58420-4c20-4fb5-9232-c29a21b043ce",
                             Email = "zenoteper@icloud.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ZENOTEPER@ICLOUD.COM",
                             NormalizedUserName = "MATVEY",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPqCZXGKsTzVQKU2IHMRCuSsWVSpE274a8rk8ghPWKE4tNnH3cd1KAYF+7VOcpXc9Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEe9F3mqEdli4o1JZVt4jYkzYVZD8BtYyBIGjWLt4NhrrlB4JqHXEnxtqyWsUM31WA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
-                            TypesInfoListId = 0,
                             UserName = "Matvey"
                         },
                         new
                         {
                             Id = "f294e833-15e9-4066-8b41-61847ff6f0f7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bd0d419b-cc6e-4bc1-8c51-e4ff4f096707",
+                            ConcurrencyStamp = "3530a853-15a2-4719-a727-a1521d5fdb06",
                             Email = "someuser@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SOMEUSER@EMAIL.COM",
                             NormalizedUserName = "SOMEUSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOBgYO62yP+kKQC2OaHRx53HoMerfBAG9JRUwUzHhl7eT9ANdhodllZdTs1SmI3YcQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJa7jw5Biibj5aUWtqqjnvMf/zlvbVx41SnYJ12g4+ZpflYD0k42Qdmtzdwd+3GiKQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
-                            TypesInfoListId = 0,
                             UserName = "someUser"
                         });
                 });
@@ -314,15 +316,49 @@ namespace SpeedTyping.Migrations
                     b.Property<int>("TextWriteType")
                         .HasColumnType("int");
 
+                    b.Property<int?>("TextWriteTypeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("UnfixedErrorsCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("Id");
+
+                    b.HasIndex("TextWriteTypeId");
+
+                    b.ToTable("TextWriteInfo");
+                });
+
+            modelBuilder.Entity("SpeedTyping.Model.Data.TextWriteType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("TextWriteTypeInfosId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TypeInfo")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("TextWriteTypeInfos");
+                    b.HasIndex("TextWriteTypeInfosId");
+
+                    b.ToTable("TextWriteType");
+                });
+
+            modelBuilder.Entity("SpeedTyping.Model.Data.TextWriteTypeInfos", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TextWriteTypes");
                 });
 
             modelBuilder.Entity("SpeedTyping.Model.Text", b =>
@@ -397,6 +433,39 @@ namespace SpeedTyping.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SpeedTyping.Model.Data.ApplicationUser", b =>
+                {
+                    b.HasOne("SpeedTyping.Model.Data.TextWriteTypeInfos", "TextWriteTypesInfo")
+                        .WithMany()
+                        .HasForeignKey("TextWriteTypesInfoId");
+
+                    b.Navigation("TextWriteTypesInfo");
+                });
+
+            modelBuilder.Entity("SpeedTyping.Model.Data.TextWriteInfo", b =>
+                {
+                    b.HasOne("SpeedTyping.Model.Data.TextWriteType", null)
+                        .WithMany("TextWriteInfos")
+                        .HasForeignKey("TextWriteTypeId");
+                });
+
+            modelBuilder.Entity("SpeedTyping.Model.Data.TextWriteType", b =>
+                {
+                    b.HasOne("SpeedTyping.Model.Data.TextWriteTypeInfos", null)
+                        .WithMany("TypesInfoList")
+                        .HasForeignKey("TextWriteTypeInfosId");
+                });
+
+            modelBuilder.Entity("SpeedTyping.Model.Data.TextWriteType", b =>
+                {
+                    b.Navigation("TextWriteInfos");
+                });
+
+            modelBuilder.Entity("SpeedTyping.Model.Data.TextWriteTypeInfos", b =>
+                {
+                    b.Navigation("TypesInfoList");
                 });
 #pragma warning restore 612, 618
         }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SpeedTyping.Model.Data;
 
 namespace SpeedTyping.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211031050730_AddedTextWriteTypeSystem")]
+    partial class AddedTextWriteTypeSystem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,14 +51,14 @@ namespace SpeedTyping.Migrations
                         new
                         {
                             Id = "dc086066-451d-4cb1-a1ad-933352eb82b4",
-                            ConcurrencyStamp = "23bb4c3a-8ece-4569-87bf-86119b89b149",
+                            ConcurrencyStamp = "c23c6539-61cf-4c01-9a1a-613907b27520",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "d4dad604-45e4-4ee7-b7b1-697bf7a623b2",
-                            ConcurrencyStamp = "b48e206d-1b12-4dc4-8683-d504de3282fa",
+                            ConcurrencyStamp = "29bfce7d-9201-4400-b634-4d6fd60a6695",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -230,7 +232,7 @@ namespace SpeedTyping.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
-                    b.Property<int>("TypesInfoListId")
+                    b.Property<int>("TypesInfoId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserName")
@@ -254,34 +256,34 @@ namespace SpeedTyping.Migrations
                         {
                             Id = "215eedc8-7e86-46f6-88dc-6b052c4ed7b0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "20ba4b67-44bd-4928-ac05-2e25963dc52b",
+                            ConcurrencyStamp = "8cbfcf11-7120-44ba-8a75-7064795253d6",
                             Email = "zenoteper@icloud.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ZENOTEPER@ICLOUD.COM",
                             NormalizedUserName = "MATVEY",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPqCZXGKsTzVQKU2IHMRCuSsWVSpE274a8rk8ghPWKE4tNnH3cd1KAYF+7VOcpXc9Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHhDJvoZDAU7azdTHSo4RPocwN5hQ/KgJNqpvCI/speIHVujl1LzQ9+8Z0zFVFm5Ww==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
-                            TypesInfoListId = 0,
+                            TypesInfoId = 0,
                             UserName = "Matvey"
                         },
                         new
                         {
                             Id = "f294e833-15e9-4066-8b41-61847ff6f0f7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bd0d419b-cc6e-4bc1-8c51-e4ff4f096707",
+                            ConcurrencyStamp = "173c369f-8390-4dbc-b4b0-59d41c722a10",
                             Email = "someuser@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SOMEUSER@EMAIL.COM",
                             NormalizedUserName = "SOMEUSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOBgYO62yP+kKQC2OaHRx53HoMerfBAG9JRUwUzHhl7eT9ANdhodllZdTs1SmI3YcQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN1W5lQRd58lLBBspQIv1hfSHqj7naVUQQxzeMGB5kiSi7iExxRXsHTF5Zs9YGxYQg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
-                            TypesInfoListId = 0,
+                            TypesInfoId = 0,
                             UserName = "someUser"
                         });
                 });
@@ -314,15 +316,37 @@ namespace SpeedTyping.Migrations
                     b.Property<int>("TextWriteType")
                         .HasColumnType("int");
 
+                    b.Property<int?>("TextWriteTypeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("UnfixedErrorsCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("Id");
+
+                    b.HasIndex("TextWriteTypeId");
+
+                    b.ToTable("TextWriteInfo");
+                });
+
+            modelBuilder.Entity("SpeedTyping.Model.Data.TextWriteType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("TypeInfo")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("TextWriteTypeInfos");
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("TextWriteType");
                 });
 
             modelBuilder.Entity("SpeedTyping.Model.Text", b =>
@@ -397,6 +421,30 @@ namespace SpeedTyping.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SpeedTyping.Model.Data.TextWriteInfo", b =>
+                {
+                    b.HasOne("SpeedTyping.Model.Data.TextWriteType", null)
+                        .WithMany("TextWriteInfos")
+                        .HasForeignKey("TextWriteTypeId");
+                });
+
+            modelBuilder.Entity("SpeedTyping.Model.Data.TextWriteType", b =>
+                {
+                    b.HasOne("SpeedTyping.Model.Data.ApplicationUser", null)
+                        .WithMany("TypesInfo")
+                        .HasForeignKey("ApplicationUserId");
+                });
+
+            modelBuilder.Entity("SpeedTyping.Model.Data.ApplicationUser", b =>
+                {
+                    b.Navigation("TypesInfo");
+                });
+
+            modelBuilder.Entity("SpeedTyping.Model.Data.TextWriteType", b =>
+                {
+                    b.Navigation("TextWriteInfos");
                 });
 #pragma warning restore 612, 618
         }

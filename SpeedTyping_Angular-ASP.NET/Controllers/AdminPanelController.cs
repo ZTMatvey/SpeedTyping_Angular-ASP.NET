@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SpeedTyping.Domain;
 using SpeedTyping.Model;
+using SpeedTyping.Model.Data;
 using SpeedTyping.Model.ViewModel;
 using System;
 using System.Collections.Generic;

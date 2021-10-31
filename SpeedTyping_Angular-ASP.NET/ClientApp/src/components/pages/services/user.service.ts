@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { TextWriteInfo } from '../text-write-result/text-write-info';
 import { User } from './user';
 
 @Injectable({
@@ -7,6 +8,7 @@ import { User } from './user';
 })
 export class UserService {
   private url = "/api/Account/UserInfo";
+  private updateResultUrl = "/api/TextWrite/UpdateResult";
   userName: string = "";
   private _isAuthorized: boolean | null = null;
   data?: User;
@@ -64,6 +66,20 @@ export class UserService {
     var payLoad = JSON.parse(window.atob(token.split(".")[1]));
     var userRole = payLoad.role;
     return userRole;
+  }
+  updateTextWriteInfoAndGetBest(textWriteInfo: TextWriteInfo): Promise<TextWriteInfo> {
+    let token = localStorage.getItem("token");    
+    let header = new HttpHeaders({"Authorization": "Bearer " + token});
+    let body = { 
+      textId: textWriteInfo.textId, 
+      textSize: textWriteInfo.textSize,
+      textWriteType: textWriteInfo.textWriteType, 
+      correctCharsCount: textWriteInfo.correctCharsCount, 
+      errorCharsCount: textWriteInfo.errorCharsCount, 
+      unfixedErrorsCount: textWriteInfo.unfixedErrorsCount,
+      miliseconds: textWriteInfo.miliseconds, 
+    };
+    return this.http.post<TextWriteInfo>(this.updateResultUrl, body, { headers: header }).toPromise();
   }
   logout()
   {

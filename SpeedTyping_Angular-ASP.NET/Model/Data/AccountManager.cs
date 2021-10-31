@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace SpeedTyping.Domain
+namespace SpeedTyping.Model.Data
 {
     public class AccountManager
     {

@@ -2,14 +2,16 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SpeedTyping.Model;
+using System.Collections.Generic;
 
-namespace SpeedTyping.Domain
+namespace SpeedTyping.Model.Data
 {
     public class ApplicationDbContext: IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options){}
 
         public DbSet<Text> Texts { get; set; }
+        public DbSet<TextWriteInfo> TextWriteTypeInfos { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -20,7 +22,7 @@ namespace SpeedTyping.Domain
                 Name = "admin",
                 NormalizedName = "ADMIN"
             });
-            builder.Entity<ApplicationUser>().HasData(new ApplicationUser
+            builder.Entity<ApplicationUser>().HasData(new ApplicationUser(this)
             {
                 Id = "215eedc8-7e86-46f6-88dc-6b052c4ed7b0",
                 UserName = "Matvey",
@@ -44,7 +46,7 @@ namespace SpeedTyping.Domain
                 Name = "user",
                 NormalizedName = "USER"
             });
-            builder.Entity<ApplicationUser>().HasData(new ApplicationUser
+            builder.Entity<ApplicationUser>().HasData(new ApplicationUser(this)
             {
                 Id = "f294e833-15e9-4066-8b41-61847ff6f0f7",
                 UserName = "someUser",

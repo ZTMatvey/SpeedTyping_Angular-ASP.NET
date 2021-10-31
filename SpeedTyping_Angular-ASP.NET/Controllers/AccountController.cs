@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using SpeedTyping.Domain;
 using SpeedTyping.Model.ViewModel;
 using SpeedTyping.Service;
 using SpeedTyping.Helper;
+using SpeedTyping.Model.Data;
 
 namespace SpeedTyping.Controllers
 {
@@ -22,10 +22,12 @@ namespace SpeedTyping.Controllers
     public class AccountController : ControllerBase
     {
         private readonly AccountManager _accountManager;
+        private readonly ApplicationDbContext _context;
 
-        public AccountController(AccountManager accountManager)
+        public AccountController(AccountManager accountManager, ApplicationDbContext context)
         {
             _accountManager = accountManager;
+            _context = context;
         }
         [HttpGet]
         [Route("Get")]
@@ -39,13 +41,21 @@ namespace SpeedTyping.Controllers
         [Route("Register")]
         public async Task<object> RegistrateUser(RegistrationViewModel model)
         {
-            var user = new ApplicationUser()
+            var user = new ApplicationUser(_context)
             {
                 UserName = model.UserName,
                 Email = model.Email,
             };
-            var result = await _accountManager.UserManager.CreateAsync(user, model.Password);
-            await _accountManager.UserManager.AddToRoleAsync(user, "user");
+            IdentityResult result = new IdentityResult();
+            try
+            {
+                result = await _accountManager.UserManager.CreateAsync(user, model.Password);
+                await _accountManager.UserManager.AddToRoleAsync(user, "user");
+            }
+            catch(Exception ex)
+            {
+                var msg = ex.Message;
+            }
             return Ok(result);
         }
         [HttpPost]

@@ -4,6 +4,7 @@ import { TextWriteInfo } from '../../text-write-result/text-write-info';
 import { ITypeActions } from './type-actions/abstract-type-actions';
 import { FreeTypeActions } from './type-actions/free-type-actions';
 import { NormalTypeActions } from './type-actions/normal-type-actions';
+import { LineUpdateResult } from './line-update-enum';
 
 @Component({
   selector: 'st-text-write-text-box',
@@ -128,10 +129,12 @@ export class TextBoxComponent implements OnInit {
     if(isSizeMoreThanInCurrentLine && lastCharIsSpace)
     {
       let result = this.updateLine(this.lines[this.currentLineIndex], textBoxValue);
-      if(result === 0)
+      if(result === LineUpdateResult.textCompleted)
         this.textCompleted();
+      if(result !== LineUpdateResult.error)
+        return;
     }
-
+    
     let isLengthMax = false;
     let isTextBoxValid = this.isTextBoxValid(textBoxValue);
     if(textBoxValue.length > this.currentMaxInputLength)
@@ -161,16 +164,16 @@ export class TextBoxComponent implements OnInit {
       return true;
     return false;
   }
-  updateLine(normalLine: string, currentLine: string): number{
+  updateLine(normalLine: string, currentLine: string): LineUpdateResult{
     if(!this.typeActions!.canUpdateLine(normalLine, currentLine))
-      return -1;
+      return LineUpdateResult.error;
     this.textBox!.value = "";
     this.currentLineIndex++;
     this.currentMaxInputLength = 0;
     this.currentLineChanged();
     if(this.lines.length === this.currentLineIndex)
-      return 0;
-    return 1;
+      return LineUpdateResult.textCompleted;
+    return LineUpdateResult.success;
   }
   textCompleted(){
     this.typeActions?.allCorrectInTextBox();

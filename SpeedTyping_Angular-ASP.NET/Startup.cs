@@ -11,9 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using SpeedTyping.Domain;
-using SpeedTyping.Domain.Repositories.Abstract;
-using SpeedTyping.Domain.Repositories.EF;
+using SpeedTyping.Model.Data;
+using SpeedTyping.Model.Data.Repositories.Abstract;
+using SpeedTyping.Model.Data.Repositories.EF;
 using SpeedTyping.Service;
 
 namespace SpeedTyping
@@ -42,6 +42,7 @@ namespace SpeedTyping
             });
 
             services.AddTransient<ITextRepository, EFTextRepository>();
+            services.AddTransient<ITextWriteTypeInfosRepository, EFTextWriteTypeInfosRepository>();
             services.AddTransient<DataManager>();
             services.AddTransient<AccountManager>();
             
