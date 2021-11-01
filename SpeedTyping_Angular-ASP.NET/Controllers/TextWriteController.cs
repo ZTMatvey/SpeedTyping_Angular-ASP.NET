@@ -27,7 +27,7 @@ namespace SpeedTyping.Controllers
         [Route("UpdateResult")]
         public async Task<IActionResult> UpdateResult(TextWriteInfo model)
         {
-            var userId = User.Claims.First(x => x.Type == "UserID").ToString();
+            var userId = User.Claims.First(x => x.Type == "UserID").ToString()[8..];
             var user = await _accountManager.UserManager.FindByIdAsync(userId);
             model.UserId = userId;
             var bestResult = _dataManager.TextWriteTypeInfos.SaveAndGetBest(model);

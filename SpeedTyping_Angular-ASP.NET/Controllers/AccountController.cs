@@ -22,21 +22,15 @@ namespace SpeedTyping.Controllers
     public class AccountController : ControllerBase
     {
         private readonly AccountManager _accountManager;
+        private readonly DataManager _dataManager;
         private readonly ApplicationDbContext _context;
 
-        public AccountController(AccountManager accountManager, ApplicationDbContext context)
+        public AccountController(AccountManager accountManager, ApplicationDbContext context, DataManager dataManager)
         {
             _accountManager = accountManager;
             _context = context;
+            _dataManager = dataManager;
         }
-        [HttpGet]
-        [Route("Get")]
-        public void Get()
-        {
-            var xz = 2;
-            xz++;
-        }
-
         [HttpPost]
         [Route("Register")]
         public async Task<object> RegistrateUser(RegistrationViewModel model)
@@ -101,6 +95,14 @@ namespace SpeedTyping.Controllers
             {
                 user.UserName
             };
+        }
+        [HttpGet]
+        [Authorize]
+        [Route("AllTextWriteResults")]
+        public IEnumerable<object> GetAllTextWriteResults()
+        {
+            var userId = User.Claims.First(x => x.Type == "UserID").Value;
+            return _dataManager.TextWriteTypeInfos.GetAllByUserId(userId);
         }
     }
 }

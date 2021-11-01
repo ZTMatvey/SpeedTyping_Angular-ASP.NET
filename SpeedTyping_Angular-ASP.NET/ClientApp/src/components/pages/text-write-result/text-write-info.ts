@@ -5,6 +5,8 @@ export class TextWriteInfo {
     public correctCharsCount = 0;
     public countOfAllChars = 0;
     public miliseconds = 0;
+    public title = "";
+    public completedCount = 0;
 
     unfixedErrorsCount: number = 0;
 
@@ -20,8 +22,8 @@ export class TextWriteInfo {
         public textSize: number,
         public textWriteType: number) { 
         TextWriteInfo._lastTextInfo = this;
-     }
-     public static  percentOfErrors(textWriteInfo: TextWriteInfo){
+    }
+    public static percentOfErrors(textWriteInfo: TextWriteInfo){
         return textWriteInfo.errorCharsCount / textWriteInfo.countOfAllChars * 100;
     }
     public static percentOfCorrects(textWriteInfo: TextWriteInfo){

@@ -28,9 +28,6 @@ export class PopupComponent {
   text?: TextService;
   
   popupOpened?: boolean = false;
-  /*ngAfterViewInit(){
-    this.openPopup(new TextService("Title", "Content", -1, 5));
-  }*/
 
   constructor(readonly themesData: ThemesDataService) {}
 

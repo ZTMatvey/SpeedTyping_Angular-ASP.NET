@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Router, Event, NavigationEnd } from '@angular/router';
 import { ThemesDataService } from 'src/themes/themes-data.service';
 import { CommonButtonComponent } from '../common-button/common-button.component';
 

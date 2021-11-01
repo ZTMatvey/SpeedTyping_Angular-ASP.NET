@@ -62,11 +62,11 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    & .text-type-element:first-child {
+    & .tooltip-wrapper:first-child {
         border-top-left-radius: 2px;
         border-bottom-left-radius: 2px;
     }
-    & .text-type-element:last-child {
+    & .tooltip-wrapper:last-child {
         border-top-right-radius: 2px;
         border-bottom-right-radius: 2px;
         border-right: 1px solid var(--text-color);
@@ -77,13 +77,14 @@
     text-align: center;
     font-family: $main-font;
     color: var(--text-color);
+    width: inherit;
+    height: inherit;
     font-size: 15px;
     padding: 10px 0;
-    border: 1px solid var(--text-color);
-    border-right: none;
     user-select: none;
     cursor: pointer;
     transition: .05s linear;
+    box-sizing: border-box;
     &:hover{
         box-shadow: inset 0 0 2px var(--text-color);
     }
@@ -91,4 +92,11 @@
 .text-type-element-selected{
     background-color: var(--text-color);
     color: var(--bg-color)
+}
+.tooltip-wrapper{
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--text-color);
+    border-right: none;
+    box-sizing: content-box;
 }

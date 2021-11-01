@@ -12,6 +12,7 @@
         public int UnfixedErrorsCount { get; set; }
         public int Miliseconds { get; set; }
         public int CompletedCount { get; set; }
+        public int CountOfAllChars { get; set; }
 
         public void CheckAndUpdateValues(TextWriteInfo other)
         {

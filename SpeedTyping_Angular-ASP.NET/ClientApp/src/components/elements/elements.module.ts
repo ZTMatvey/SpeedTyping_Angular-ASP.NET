@@ -6,17 +6,24 @@ import { CommonButtonComponent } from "./buttons/common-button/common-button.com
 import { ThemesModule } from "src/themes/themes.module";
 import { RouterModule } from "@angular/router";
 import { CommonPopupComponent } from './popups/common-popup/common-popup.component';
+import { LinkButtonComponent } from "./buttons/link-button/link-button.component";
+import { CommonTooltipComponent } from './tooltips/common-tooltip/common-tooltip.component';
 
 @NgModule({
     declarations: [
         CommonButtonComponent,
         LogoComponent,
-        CommonPopupComponent],
+        CommonPopupComponent,
+        LinkButtonComponent,
+        CommonTooltipComponent,
+        CommonTooltipComponent ],
     imports: [ CommonModule, ThemesModule, RouterModule ],
     providers: [],
     exports: [
         CommonButtonComponent,
-        LogoComponent],
+        LogoComponent,
+        LinkButtonComponent,
+        CommonTooltipComponent ],
 })
 export class ElementsModule{
 }

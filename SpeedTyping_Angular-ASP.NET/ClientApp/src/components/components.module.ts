@@ -9,7 +9,6 @@ import { RouterModule } from "@angular/router";
 import { TextSelectionComponent } from "./pages/text-selection/text-selection.component";
 import { LoginComponent } from "./pages/auth/login/login.component";
 import { RegisterComponent } from "./pages/auth/register/register.component";
-import { LinkButtonComponent } from "./elements/buttons/link-button/link-button.component";
 import { PopupComponent } from './pages/text-selection/popup/popup.component';
 import { TextCardComponent } from './pages/text-selection/text-card/text-card.component';
 import { TextWriteComponent } from './pages/text-write/text-write.component';
@@ -28,9 +27,10 @@ import { HttpClientModule } from "@angular/common/http";
 import { CreateTextComponent } from './pages/admin-panel/create-text/create-text.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { TextWriteResultComponent } from './pages/text-write-result/text-write-result.component';
+import { ProgressBlockComponent } from "./pages/user-profile/blocks/progress-block/progress-block.component";
 
 @NgModule({
-    declarations: [ HeaderButtonsComponent, HeaderComponent, TextSelectionComponent, LoginComponent, RegisterComponent, LinkButtonComponent, PopupComponent, TextCardComponent, TextWriteComponent, TimerComponent, CpmMeterComponent, TextBoxComponent, TextSettingsComponent, TextStatisticComponent, AdminPanelComponent, TextsComponent, UsersComponent, AdminPanelTextCardComponent, CreateTextComponent, UserProfileComponent, TextWriteResultComponent ],
+    declarations: [ HeaderButtonsComponent, HeaderComponent, TextSelectionComponent, LoginComponent, RegisterComponent, PopupComponent, TextCardComponent, TextWriteComponent, TimerComponent, CpmMeterComponent, TextBoxComponent, TextSettingsComponent, TextStatisticComponent, AdminPanelComponent, TextsComponent, UsersComponent, AdminPanelTextCardComponent, CreateTextComponent, UserProfileComponent, TextWriteResultComponent, ProgressBlockComponent ],
     imports: [ CommonModule, ElementsModule, ThemesModule, RouterModule, ReactiveFormsModule, HttpClientModule, FormsModule ],
     providers: [],
     exports: [ HeaderComponent ],

@@ -1,5 +1,6 @@
 ﻿using SpeedTyping.Model.Data.Repositories.Abstract;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SpeedTyping.Model.Data.Repositories.EF
@@ -49,6 +50,9 @@ namespace SpeedTyping.Model.Data.Repositories.EF
                 Update(old, info);
             return getValue();
         }
-        public TextWriteInfo GetById(int id) => context.TextWriteTypeInfos.FirstOrDefault(x => x.Id == id);
+        public IEnumerable<TextWriteInfo> GetAllByUserId(string id)
+            => context.TextWriteTypeInfos.Where(x => x.UserId == id);
+        public TextWriteInfo GetById(int id) 
+            => context.TextWriteTypeInfos.FirstOrDefault(x => x.Id == id);
     }
 }

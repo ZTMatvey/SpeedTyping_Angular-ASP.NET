@@ -6,12 +6,16 @@
         {{text?.title || ""}}
     </div>
     <div class="text-types" id="text-types">
-        <div (click)="selectTypeBtnClicked($event, 1)" class="text-type-element">
-            normal
-        </div>
-        <div (click)="selectTypeBtnClicked($event, 2)" class="text-type-element">
-            free
-        </div>
+        <st-common-tooltip [helpMessage]="'Подсветка при ошибках. Нельзя перейти на следующую строку с ошибками в этой'" (click)="selectTypeBtnClicked($event, 1)" class="tooltip-wrapper">
+            <div class="text-type-element">
+                normal
+            </div>
+        </st-common-tooltip>
+        <st-common-tooltip [helpMessage]="'Нет подсветки при ошибках. Можно перейти на следущую строку, если достаточно символов в этой'" (click)="selectTypeBtnClicked($event, 2)" class="tooltip-wrapper">
+            <div class="text-type-element">
+                free
+            </div>
+        </st-common-tooltip>
     </div>
     <div class="text-selection__popup-text-size">
         <div class="text-selection__popup-character-count">

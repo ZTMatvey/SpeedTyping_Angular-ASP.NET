@@ -45,6 +45,21 @@ export class TextsService{
       this.update();
     });
   }
+  getTextSizeNameById(id: number) {
+    switch(id)
+    {
+      case 1:
+        return "Ultra short";
+      case 2:
+        return "Short";
+      case 3:
+        return "Medium";
+      case 4:
+        return "Large";
+      default:
+        return "Full";
+    }
+  }
   private loadTexts(){
     return this.http.get<any[]>(this.url);
   }
