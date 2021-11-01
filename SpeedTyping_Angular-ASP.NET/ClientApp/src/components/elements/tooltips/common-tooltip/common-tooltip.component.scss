@@ -1,0 +1,34 @@
+@import "../../../variables";
+
+.tooltip {
+    &:hover .tooltip-text{
+        visibility: visible;
+        opacity: 1;
+    }
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+.tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    color: var(--text-color);
+    font-family: $main-font;
+    padding: 10px 5px;
+    border-radius: 2px;
+    border: 1px solid var(--text-color);
+    background-color: var(--bg-color);
+    transition: .2s ease;
+    position: absolute;
+    top: -125%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+.tooltip-body {
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    height: 100%;
+}

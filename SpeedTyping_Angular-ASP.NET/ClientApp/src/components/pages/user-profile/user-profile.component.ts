@@ -8,7 +8,7 @@ import { InfoBlock } from './info-block.service';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
-export class UserProfileComponent implements OnInit, AfterViewInit {
+export class UserProfileComponent implements AfterViewInit {
   @ViewChild("profileBlcok", { static: false })
   profileBlcok?: ElementRef;
   @ViewChild("progressBlcok", { static: false })
@@ -23,11 +23,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
   personalizationButton?: ElementRef;
 
   private blocks: InfoBlock[] = [];
-  constructor(readonly user: UserService, readonly router: Router) {
-  }
-
-  ngOnInit(): void {
-  }
+  constructor(readonly user: UserService, readonly router: Router) { }
   ngAfterViewInit(){
     this.addBlock("Profile", this.profileBlcok!, this.profileButton!, "block");
     this.addBlock("Progress", this.progressBlcok!, this.progressButton!, "block");

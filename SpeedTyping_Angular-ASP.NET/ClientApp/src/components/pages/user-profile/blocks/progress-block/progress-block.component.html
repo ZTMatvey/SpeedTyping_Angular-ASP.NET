@@ -1,0 +1,60 @@
+<div class="personal-account__global-info">
+    <div class="personal-account__global-info-item">
+        Всего времени: 42:56.156
+    </div>
+    <div class="personal-account__global-info-item">
+        Средний CPM: 200
+    </div>
+    <div class="personal-account__global-info-item">
+        Средний процент ошибок: 6
+    </div>
+</div>
+<div class="personal-account__text-statistics" *ngFor="let resultsGroup of results">
+    <div class="personal-account__name-block">
+        <div class="personal-account__text-name">
+            {{resultsGroup.name}}
+        </div>
+    </div>
+    <div class="personal-account__main-block">
+        <div class="personal-accout__concrete-text-statistics"  *ngFor="let result of resultsGroup.group">
+            <div class="personal-accout__concrete-text-name">
+                {{textsServise.getTextSizeNameById(result.textSize)}} ({{result.countOfAllChars}})
+            </div>
+            <div class="personal-accout__statistics-items">
+                <div class="personal-accout__statistics-item">
+                    Напечатано раз: {{result.completedCount}}
+                </div>
+                <div class="personal-accout__statistics-item">
+                    Лучшее CPM: {{result.cpm}}
+                </div>
+                <div class="personal-accout__statistics-item">
+                    Лучшее время: {{textWiteInfoType.time(result)}}
+                </div>
+                <div class="personal-accout__statistics-item">
+                    Лучший процент ошибок: {{textWiteInfoType.percentOfErrors(result)}}
+                </div>
+            </div>
+            <st-common-button class="button" [isSmall]="true">Очистить</st-common-button>
+        </div>
+        <!-- <div class="personal-accout__concrete-text-statistics">
+            <div class="personal-accout__concrete-text-name">
+                full (1567)
+            </div>
+            <div class="personal-accout__statistics-items">
+                <div class="personal-accout__statistics-item">
+                    Напечатано раз: 6
+                </div>
+                <div class="personal-accout__statistics-item">
+                    Лучшее CPM: 123.456
+                </div>
+                <div class="personal-accout__statistics-item">
+                    Лучшее время: 5:03.134
+                </div>
+                <div class="personal-accout__statistics-item">
+                    Лучший процент ошибок: 4
+                </div>
+            </div>
+            <st-common-button class="button" [isSmall]="true">Очистить</st-common-button>
+        </div> -->
+    </div>
+</div>

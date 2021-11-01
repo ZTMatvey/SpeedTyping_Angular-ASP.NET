@@ -1,0 +1,83 @@
+[33mcommit 4db459ba215a5993dd64781a0b64096862fbb1b5[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: ZTMatvey <73705821+ZTMatvey@users.noreply.github.com>
+Date:   Wed Oct 27 19:27:07 2021 +0700
+
+    Добавлена страница профиля
+
+[33mcommit b904b723d4204fd669e09b99a822f03e7189591f[m
+Author: ZTMatvey <73705821+ZTMatvey@users.noreply.github.com>
+Date:   Wed Oct 27 18:35:33 2021 +0700
+
+    Добавлены сообщения об ошибках при входе и регистрации
+
+[33mcommit 6d64e7aea9df25ae9350c2310a5c87e7daf70d6f[m
+Author: ZTMatvey <73705821+ZTMatvey@users.noreply.github.com>
+Date:   Wed Oct 27 16:54:00 2021 +0700
+
+    Настроена панель администратора и добавлены функции редактирования и удаления текстов.
+
+[33mcommit 7f3f55a2943494a9eeb815a30f0334f07d3f83e8[m
+Author: ZTMatvey <73705821+ZTMatvey@users.noreply.github.com>
+Date:   Wed Oct 27 13:57:36 2021 +0700
+
+    Добавлена возможность добавлять тексты
+
+[33mcommit 32b3c7643c56cc0692d95ea2e794259d7de11e88[m
+Author: ZTMatvey <73705821+ZTMatvey@users.noreply.github.com>
+Date:   Mon Oct 25 15:38:20 2021 +0700
+
+    Добавлена функция авторизации
+
+[33mcommit 155ecad69fb545d794ec6f450e576ad1c7ac25d4[m
+Author: ZTMatvey <73705821+ZTMatvey@users.noreply.github.com>
+Date:   Mon Oct 25 12:16:30 2021 +0700
+
+    Добавлена функция регистрации
+
+[33mcommit 663695184b9539074aa992bf25ad123284cee4e1[m
+Author: ZTMatvey <73705821+ZTMatvey@users.noreply.github.com>
+Date:   Wed Oct 20 12:27:14 2021 +0700
+
+    Установлены необходимые пакеты
+
+[33mcommit 487fb6a84bab5752cd73e84d7f27d99d7d757a66[m
+Author: ZTMatvey <73705821+ZTMatvey@users.noreply.github.com>
+Date:   Wed Oct 20 12:18:08 2021 +0700
+
+    Удалены gitignore файлы
+
+[33mcommit f153c14096f898e74937391c50dfaa4b7a91a9de[m
+Author: ZTMatvey <73705821+ZTMatvey@users.noreply.github.com>
+Date:   Wed Oct 20 12:17:47 2021 +0700
+
+    Удалены gitignore файлы
+
+[33mcommit 5afbc85635a7238092420cfaf9f90e4e2d3a5896[m
+Author: ZTMatvey <73705821+ZTMatvey@users.noreply.github.com>
+Date:   Wed Oct 20 12:15:49 2021 +0700
+
+    Обновлен .gitignore
+
+[33mcommit ff443c3a1c8b5f148af830e4c33001cd6b93db28[m
+Author: ZTMatvey <73705821+ZTMatvey@users.noreply.github.com>
+Date:   Wed Oct 20 12:15:31 2021 +0700
+
+    Обновлен .gitignore
+
+[33mcommit 18bf842548fb04660a9ba38f50e177ca2fda676e[m
+Author: ZTMatvey <73705821+ZTMatvey@users.noreply.github.com>
+Date:   Wed Oct 20 12:11:56 2021 +0700
+
+    Удалены ненужные файлы
+
+[33mcommit 209193e5e2ce1df16623f2215f985f60b8373106[m
+Author: ZTMatvey <73705821+ZTMatvey@users.noreply.github.com>
+Date:   Wed Oct 20 11:57:11 2021 +0700
+
+    Добавлено ClientApp
+
+[33mcommit ecdddcd485b23f892092d1d130300f384a209352[m
+Author: ZTMatvey <73705821+ZTMatvey@users.noreply.github.com>
+Date:   Wed Oct 20 11:37:59 2021 +0700
+
+    init commit

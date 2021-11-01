@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SpeedTyping.Domain;
+using SpeedTyping.Model.Data;
 
 namespace SpeedTyping.Migrations
 {
@@ -49,14 +49,14 @@ namespace SpeedTyping.Migrations
                         new
                         {
                             Id = "dc086066-451d-4cb1-a1ad-933352eb82b4",
-                            ConcurrencyStamp = "77ecff95-2534-4305-8e6e-62d1182a668a",
+                            ConcurrencyStamp = "c5de5982-fe63-460b-9ea5-2f7ad4407258",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "d4dad604-45e4-4ee7-b7b1-697bf7a623b2",
-                            ConcurrencyStamp = "7a012290-b04f-4028-943b-4c2b1f9a23bb",
+                            ConcurrencyStamp = "b5fa20af-f1d4-4151-97ca-e09419622b66",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -182,7 +182,7 @@ namespace SpeedTyping.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("SpeedTyping.Domain.ApplicationUser", b =>
+            modelBuilder.Entity("SpeedTyping.Model.Data.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -230,6 +230,9 @@ namespace SpeedTyping.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
+                    b.Property<int>("TypesInfoListId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -251,37 +254,84 @@ namespace SpeedTyping.Migrations
                         {
                             Id = "215eedc8-7e86-46f6-88dc-6b052c4ed7b0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "92b81389-3559-490d-a4fa-48836bcadc32",
+                            ConcurrencyStamp = "d49a074b-2faf-4c0f-a705-1651475961b1",
                             Email = "zenoteper@icloud.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ZENOTEPER@ICLOUD.COM",
                             NormalizedUserName = "MATVEY",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPM8/d75hImHboi/OGIhOres3vNNQETbLdzqO/DrJ9eZmNasS6hGUsBC7qvVqwDuaw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGeGt5d77/D8NzPIrSKnN6C1B1evE66aZCimyi9D3iLeD/yOjdfG0fYHtRAUDeN1Kw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
+                            TypesInfoListId = 0,
                             UserName = "Matvey"
                         },
                         new
                         {
                             Id = "f294e833-15e9-4066-8b41-61847ff6f0f7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b5becb40-d7a9-4026-9191-7ba30ecab9ec",
+                            ConcurrencyStamp = "4dff4e1d-6ea1-495e-b516-448c10a2996b",
                             Email = "someuser@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SOMEUSER@EMAIL.COM",
                             NormalizedUserName = "SOMEUSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBQ6wcgF21S8Anvuruzc68w3PH+6j8MKnFayO1y+Ew2DHVbh3IL+48svTDeeNWXTuQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOWT0k1n7jj1lDcyetDfJ7Z+GGJxSWuTqawf0H7red5dDF1qGpccht/kU3s4kBLjAg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
+                            TypesInfoListId = 0,
                             UserName = "someUser"
                         });
                 });
 
-            modelBuilder.Entity("SpeedTyping.Domain.Entities.Text", b =>
+            modelBuilder.Entity("SpeedTyping.Model.Data.TextWriteInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("CPM")
+                        .HasColumnType("float");
+
+                    b.Property<int>("CompletedCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CorrectCharsCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CountOfAllChars")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ErrorCharsCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Miliseconds")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TextId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TextSize")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TextWriteType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UnfixedErrorsCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TextWriteTypeInfos");
+                });
+
+            modelBuilder.Entity("SpeedTyping.Model.Text", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -315,7 +365,7 @@ namespace SpeedTyping.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("SpeedTyping.Domain.ApplicationUser", null)
+                    b.HasOne("SpeedTyping.Model.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -324,7 +374,7 @@ namespace SpeedTyping.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("SpeedTyping.Domain.ApplicationUser", null)
+                    b.HasOne("SpeedTyping.Model.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -339,7 +389,7 @@ namespace SpeedTyping.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SpeedTyping.Domain.ApplicationUser", null)
+                    b.HasOne("SpeedTyping.Model.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -348,7 +398,7 @@ namespace SpeedTyping.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("SpeedTyping.Domain.ApplicationUser", null)
+                    b.HasOne("SpeedTyping.Model.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

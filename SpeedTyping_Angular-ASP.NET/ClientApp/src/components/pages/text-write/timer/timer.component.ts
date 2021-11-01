@@ -10,12 +10,14 @@ export class TimerComponent {
   seconds: number = 0;
   miliseconds: number = 0;
   timePassed: number = 0;
+  timePassedTotal: number = 0;
   interval?: any;
 
   startTimer()
   {
     this.interval = setInterval(() => {
       this.timePassed++;
+      this.timePassedTotal++;
       this.seconds = Math.trunc(this.timePassed / 100);
       if (this.seconds === 60) {
         this.minutes++;
@@ -28,5 +30,8 @@ export class TimerComponent {
   stopTimer()
   {
     clearInterval(this.interval);
+  }
+  get time(){
+    return this.timePassedTotal * 10;
   }
 }

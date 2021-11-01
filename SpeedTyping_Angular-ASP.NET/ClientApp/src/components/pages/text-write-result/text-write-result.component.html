@@ -1,0 +1,25 @@
+<div class="text-write-restult__wrapper">
+    <div class="text-write">
+        <div class="container">
+            <div class="text-write__timer-info-wrapper">
+                <div class="text-write__result-text-title">{{text?.title}}</div>
+                <div class="text-write__info">
+                    Количество ошибок: {{textWriteInfo.lastTextInfo?.errorCharsCount}} ({{textWriteInfo.percentOfErrors(textWriteInfo.lastTextInfo!) | number:'1.1-2'}}%)<span class="text-write__info" *ngIf="bestInfo"> - Лучшее: {{bestInfo!.errorCharsCount}} ({{textWriteInfo.percentOfErrors(bestInfo!) | number:'1.1-2'}}%)</span>
+                </div>
+                <div class="text-write__info">
+                    Количество верных вводов: {{textWriteInfo.lastTextInfo?.correctCharsCount}} ({{textWriteInfo.percentOfCorrects(textWriteInfo.lastTextInfo!) | number:'1.1-2'}}%)<span class="text-write__info" *ngIf="bestInfo"> - Лучшее: {{bestInfo!.correctCharsCount}} ({{textWriteInfo.percentOfCorrects(bestInfo!) | number:'1.1-2'}}%)</span>
+                </div>
+                <div class="text-write__info">
+                    CPM: {{textWriteInfo.lastTextInfo?.cpm | number:'1.1-2'}}<span class="text-write__info" *ngIf="bestInfo"> - Лучшее: {{bestInfo!.cpm | number:'1.1-2'}}</span>
+                </div>
+                <div class="text-write__info">
+                    Время: {{textWriteInfo.time(textWriteInfo.lastTextInfo!)}}<span class="text-write__info" *ngIf="bestInfo"> - Лучшее: {{textWriteInfo.time(bestInfo!)}}</span>
+                </div>
+                <div class="text-write__buttons">
+                    <st-common-button [isNormalBg]="true" class="text-write__button uppercased-and-normal-font">На главную</st-common-button>
+                    <st-common-button [isNormalBg]="true" [isSmall]="true" class="text-write__button uppercased-and-normal-font">Повторить</st-common-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

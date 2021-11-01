@@ -40,46 +40,7 @@
                     </div>
                     <div class="personal-account__progress-blcok personal-account__block"
                         #progressBlcok>
-                        <div class="personal-account__global-info">
-                            <div class="personal-account__global-info-item">
-                                Всего времени: @statisticType.AllTimeMiliseconds.GetTimeInNormalForm()
-                            </div>
-                            <div class="personal-account__global-info-item">
-                                Средний CPM: @statisticType.AverageCPM
-                            </div>
-                            <div class="personal-account__global-info-item">
-                                Средний процент ошибок: @statisticType.AverageErrorPercent
-                            </div>
-                        </div>
-                                <div class="personal-account__text-statistics">
-                                        <div class="personal-account__name-block">
-                                            <div class="personal-account__text-name">
-                                                @typeTextStatistics.Key
-                                            </div>
-                                        </div>
-                                    <div class="personal-account__main-block">
-                                            <div class="personal-accout__concrete-text-statistics">
-                                                <div class="personal-accout__concrete-text-name">
-                                                    @textStatistics.TextTitle (@textStatistics.CountOfCorrects)
-                                                </div>
-                                                <div class="personal-accout__statistics-items">
-                                                    <div class="personal-accout__statistics-item">
-                                                        Напечатано раз: @textStatistics.AmountOfFinishedTexts
-                                                    </div>
-                                                    <div class="personal-accout__statistics-item">
-                                                        Лучшее CPM: @textStatistics.CharactersPerMinute
-                                                    </div>
-                                                    <div class="personal-accout__statistics-item">
-                                                        Лучшее время: @textStatistics.Miliseconds.GetTimeInNormalForm()
-                                                    </div>
-                                                    <div class="personal-accout__statistics-item">
-                                                        Лучший процент ошибок: @textStatistics.GetPercentOfErrors()
-                                                    </div>
-                                                </div>
-                                                <st-common-button class="button" [isSmall]="true">Очистить</st-common-button>
-                                            </div>
-                                    </div>
-                                </div>
+                        <st-progress-block></st-progress-block>
                     </div>
                     <div class="personal-account__personalization-blcok"
                         #personalizationBlcok>

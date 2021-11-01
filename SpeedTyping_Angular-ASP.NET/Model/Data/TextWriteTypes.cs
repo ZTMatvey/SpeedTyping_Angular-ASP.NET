@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 
-namespace SpeedTyping.Domain
+namespace SpeedTyping.Model.Data
 {
-    public class ApplicationUser: IdentityUser
+    public enum TextWriteTypes
     {
-        
+        Normal = 1,
+        Free
     }
 }

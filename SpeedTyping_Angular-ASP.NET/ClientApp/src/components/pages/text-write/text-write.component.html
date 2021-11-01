@@ -2,7 +2,7 @@
     <div class="container">
         <div class="screen">
             <div class="text-write-body">
-                <st-text-write-text-box [text]="text" #textBox class="st-text-box" (currentlinechanged)="lineChanged($event)" (textchangedfirst)="textChangedFirst()" (newvalidcharacter)="newCorrectCharacter()" (textcompleted)="stopAll()"></st-text-write-text-box>
+                <st-text-write-text-box #textBox class="st-text-box" (currentlinechanged)="lineChanged($event)" (textchangedfirst)="textChangedFirst()" (error)="error()" (newvalidcharacter)="newCorrectCharacter()" (textcompleted)="stopAll()"></st-text-write-text-box>
                 <p class="text-write__actual-string">{{currentLine}}</p>
             </div>
             <div class="text-write__timer-info-wrapper">

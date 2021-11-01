@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { TextWriteInfo } from '../text-write-result/text-write-info';
 import { User } from './user';
 
 @Injectable({
@@ -7,6 +8,8 @@ import { User } from './user';
 })
 export class UserService {
   private url = "/api/Account/UserInfo";
+  private allTextWriteResultsUrl = "/api/Account/AllTextWriteResults";
+  private updateResultUrl = "/api/TextWrite/UpdateResult";
   userName: string = "";
   private _isAuthorized: boolean | null = null;
   data?: User;
@@ -39,8 +42,7 @@ export class UserService {
     }
   }
   private getUserInfo(){
-    var token = localStorage.getItem("token");    
-    var header = new HttpHeaders({"Authorization": "Bearer " + token});
+    let header = this.authHeaders;
     return this.http.get<User>(this.url, { headers: header }).toPromise();
   }
   isAllRolesMatch(rolesToMatch: string[]) {
@@ -64,6 +66,22 @@ export class UserService {
     var payLoad = JSON.parse(window.atob(token.split(".")[1]));
     var userRole = payLoad.role;
     return userRole;
+  }
+  getAllTextWriteResults(): Promise<TextWriteInfo[]> {
+    let header = this.authHeaders;    
+    return this.http.get<TextWriteInfo[]>(
+      this.allTextWriteResultsUrl, { headers: header })
+      .toPromise();
+  }
+  updateTextWriteInfoAndGetBest(textWriteInfo: TextWriteInfo): Promise<TextWriteInfo> {
+    
+    let header = this.authHeaders;
+    return this.http.post<TextWriteInfo>(this.updateResultUrl, textWriteInfo, { headers: header }).toPromise();
+  }
+  private get authHeaders()
+  {
+    let token = localStorage.getItem("token");    
+    return new HttpHeaders({"Authorization": "Bearer " + token});
   }
   logout()
   {

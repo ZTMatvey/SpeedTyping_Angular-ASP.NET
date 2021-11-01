@@ -64,7 +64,15 @@
         margin-top: 0;
     }
 }
-
+.text-write__button{
+    margin-top: 5px;
+}
+.text-write-restult__wrapper {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
 .text-write__result-text-title {
     font-family: $headings-font;
     color: var(--text-color);

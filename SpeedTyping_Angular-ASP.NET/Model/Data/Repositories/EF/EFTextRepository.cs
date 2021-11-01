@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
-using SpeedTyping.Domain.Repositories.Abstract;
 using SpeedTyping.Model;
+using SpeedTyping.Model.Data.Repositories.Abstract;
 
-namespace SpeedTyping.Domain.Repositories.EF
+namespace SpeedTyping.Model.Data.Repositories.EF
 {
     public class EFTextRepository : ITextRepository
     {

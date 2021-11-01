@@ -2,7 +2,7 @@
 using System.Linq;
 using SpeedTyping.Model;
 
-namespace SpeedTyping.Domain.Repositories.Abstract
+namespace SpeedTyping.Model.Data.Repositories.Abstract
 {
     public interface ITextRepository
     {
