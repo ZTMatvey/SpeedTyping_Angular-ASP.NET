@@ -48,6 +48,7 @@ export class TextWriteComponent implements AfterViewInit, OnInit {
   stopAll()
   {
     this.textWriteInfo!.miliseconds = this.timer?.time ?? 0;
+    this.textWriteInfo!.updateCpm();
     this.timer?.stopTimer(); 
     this.cpmMeter?.stopCpmMeter();
     this.cpmMeter?.hideCpmMeter();

@@ -76,17 +76,7 @@ export class UserService {
   updateTextWriteInfoAndGetBest(textWriteInfo: TextWriteInfo): Promise<TextWriteInfo> {
     
     let header = this.authHeaders;
-    let body = { 
-      textId: textWriteInfo.textId, 
-      textSize: textWriteInfo.textSize,
-      textWriteType: textWriteInfo.textWriteType, 
-      correctCharsCount: textWriteInfo.correctCharsCount, 
-      errorCharsCount: textWriteInfo.errorCharsCount, 
-      unfixedErrorsCount: textWriteInfo.unfixedErrorsCount,
-      miliseconds: textWriteInfo.miliseconds,
-      countOfAllChars: textWriteInfo.countOfAllChars
-    };
-    return this.http.post<TextWriteInfo>(this.updateResultUrl, body, { headers: header }).toPromise();
+    return this.http.post<TextWriteInfo>(this.updateResultUrl, textWriteInfo, { headers: header }).toPromise();
   }
   private get authHeaders()
   {

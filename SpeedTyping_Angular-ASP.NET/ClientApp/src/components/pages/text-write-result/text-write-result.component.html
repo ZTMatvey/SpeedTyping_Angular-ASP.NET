@@ -10,6 +10,9 @@
                     Количество верных вводов: {{textWriteInfo.lastTextInfo?.correctCharsCount}} ({{textWriteInfo.percentOfCorrects(textWriteInfo.lastTextInfo!) | number:'1.1-2'}}%)<span class="text-write__info" *ngIf="bestInfo"> - Лучшее: {{bestInfo!.correctCharsCount}} ({{textWriteInfo.percentOfCorrects(bestInfo!) | number:'1.1-2'}}%)</span>
                 </div>
                 <div class="text-write__info">
+                    CPM: {{textWriteInfo.lastTextInfo?.cpm | number:'1.1-2'}}<span class="text-write__info" *ngIf="bestInfo"> - Лучшее: {{bestInfo!.cpm | number:'1.1-2'}}</span>
+                </div>
+                <div class="text-write__info">
                     Время: {{textWriteInfo.time(textWriteInfo.lastTextInfo!)}}<span class="text-write__info" *ngIf="bestInfo"> - Лучшее: {{textWriteInfo.time(bestInfo!)}}</span>
                 </div>
                 <div class="text-write__buttons">

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SpeedTyping.Model.Data;
 
 namespace SpeedTyping.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211101120922_AddedCPM")]
+    partial class AddedCPM
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,14 +51,14 @@ namespace SpeedTyping.Migrations
                         new
                         {
                             Id = "dc086066-451d-4cb1-a1ad-933352eb82b4",
-                            ConcurrencyStamp = "c5de5982-fe63-460b-9ea5-2f7ad4407258",
+                            ConcurrencyStamp = "6024bfa3-3c3f-44e3-a0c3-d582be4b3110",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "d4dad604-45e4-4ee7-b7b1-697bf7a623b2",
-                            ConcurrencyStamp = "b5fa20af-f1d4-4151-97ca-e09419622b66",
+                            ConcurrencyStamp = "4d8f8bb7-4b28-450c-8fcc-63c6a0a55e81",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -254,13 +256,13 @@ namespace SpeedTyping.Migrations
                         {
                             Id = "215eedc8-7e86-46f6-88dc-6b052c4ed7b0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d49a074b-2faf-4c0f-a705-1651475961b1",
+                            ConcurrencyStamp = "8c49f380-8d85-4a19-8829-76319d8c7119",
                             Email = "zenoteper@icloud.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ZENOTEPER@ICLOUD.COM",
                             NormalizedUserName = "MATVEY",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGeGt5d77/D8NzPIrSKnN6C1B1evE66aZCimyi9D3iLeD/yOjdfG0fYHtRAUDeN1Kw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDuj2iCGV2nuoKQC33+zLlFZNwxO7qhT2jg3t5wkgi4JTtK3CiQqY1L3kTJpiQ26Ug==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -271,13 +273,13 @@ namespace SpeedTyping.Migrations
                         {
                             Id = "f294e833-15e9-4066-8b41-61847ff6f0f7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4dff4e1d-6ea1-495e-b516-448c10a2996b",
+                            ConcurrencyStamp = "3b32a21a-64f0-49ec-8a68-66441d38f8c0",
                             Email = "someuser@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SOMEUSER@EMAIL.COM",
                             NormalizedUserName = "SOMEUSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOWT0k1n7jj1lDcyetDfJ7Z+GGJxSWuTqawf0H7red5dDF1qGpccht/kU3s4kBLjAg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGXP4C92SjO+1neqrIIwVZ0NqXhMLUbALsScqaDMsfD+bvTrlI/CdSGgwDpNEZCn6Q==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -293,8 +295,8 @@ namespace SpeedTyping.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("CPM")
-                        .HasColumnType("float");
+                    b.Property<int>("CPM")
+                        .HasColumnType("int");
 
                     b.Property<int>("CompletedCount")
                         .HasColumnType("int");

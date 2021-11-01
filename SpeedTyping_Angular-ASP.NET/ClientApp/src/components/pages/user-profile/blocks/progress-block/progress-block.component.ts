@@ -37,7 +37,7 @@ export class ProgressBlockComponent implements OnInit {
           }
         }
         this.results.forEach((r)=>{
-          this.textsServise.getTextById(r.textId).then(text=> r.name = text?.title ?? ""); 
+          this.textsServise.getTextById(r.textId).then(text=> r.name = text?.title ?? "");
           r.group.sort(this.compareBySizeId);
         });
       });

@@ -7,12 +7,12 @@ export class TextWriteInfo {
     public miliseconds = 0;
     public title = "";
     public completedCount = 0;
+    public cpm = 0;
 
     unfixedErrorsCount: number = 0;
 
-    public static get lastTextInfo()
-    {
-        return this._lastTextInfo;
+    updateCpm() {
+        this.cpm = this.countOfAllChars / (this.miliseconds / 60000);
     }
     setTotalCharacters(chars: number) {
         this.countOfAllChars = chars;
@@ -22,6 +22,10 @@ export class TextWriteInfo {
         public textSize: number,
         public textWriteType: number) { 
         TextWriteInfo._lastTextInfo = this;
+    }
+    public static get lastTextInfo()
+    {
+        return this._lastTextInfo;
     }
     public static percentOfErrors(textWriteInfo: TextWriteInfo){
         return textWriteInfo.errorCharsCount / textWriteInfo.countOfAllChars * 100;
