@@ -63,11 +63,10 @@ export class TextSettingsComponent implements OnInit, AfterViewInit {
         }
     });
   }
-  configureTextData(text: TextService)
+  public configureTextData(text: TextService)
   {
-    this.text = text;
-    
-    this.fullTextLength = this.text?.content.length || 0;
+    this.text = text;    
+    this.fullTextLength = this.text?.content.length ?? 0;
     this.updateSize();
   }
   updateSize()

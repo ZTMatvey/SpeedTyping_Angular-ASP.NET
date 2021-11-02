@@ -18,18 +18,19 @@ export class TextsService{
     this.updateIsRunning = false;
     data.forEach((element: any) => {        
       if(element.textContent)
-        this.addText(element.title, element.textContent, element.id);
+        this.addText(element.title, element.textContent, element.id, element.language);
     });
     this.updateIsRunning = false;
   }
-  get Texts() : TextService[]
+  async getTexts() : Promise<TextService[]>
   {
-    this.checkTexts();
+    await this.checkTexts();
     return this.texts!;
   }
   async getTextById(id: number): Promise<TextService | null> {
     await this.checkTexts();
     id = parseInt(id.toString());
+    
     for(let i = 0; i < this.texts!.length; i++)
       if(this.texts![i].id === id)
         return Promise.resolve(this.texts![i]);
@@ -63,11 +64,12 @@ export class TextsService{
   private loadTexts(){
     return this.http.get<any[]>(this.url);
   }
-  private addText(title: string, content: string, id: number)
+  private addText(title: string, content: string, id: number, languageId: number)
   {
     this.checkTexts();
     let lengthOfPart = 200;
     let text = new TextService(title, content, id);
+    text.language = languageId;
     text.partOfContent = text.content.substring(0, lengthOfPart);
     if(text.content.length > lengthOfPart)
       text.partOfContent += "...";

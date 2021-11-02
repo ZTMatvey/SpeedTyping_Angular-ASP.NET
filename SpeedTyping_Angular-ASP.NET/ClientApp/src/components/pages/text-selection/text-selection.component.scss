@@ -22,6 +22,8 @@
     font-family: $headings-font;
     font-weight: 700;
     font-size: 35px;
+    display: inline-block;
+    color: var(--text-color);
 }
 .text-selection__main {
     display: flex;
@@ -42,4 +44,16 @@
     align-items: center;
     position: relative;
     background-color: var(--sub-bg-color);
+}
+.tune-icon{
+    font-family: $material-font;
+    font-size: 24px;
+    color: var(--text-color);
+    cursor: pointer;
+    user-select: none;
+    margin-right: 20px;
+}
+.heading-block {
+    display: flex;
+    align-items: center;
 }

@@ -1,0 +1,48 @@
+<div class="filter-wrapper">
+    <div class="filter-heading">Фильтры:</div>
+    <div class="filter-blocks">
+        <div class="filter-block">
+            <div class="filter-name text-common">
+                Минимальный размер: {{minContentLength | number:'5.0-0'}}
+            </div>
+            <div class="filter-body">
+            </div>
+        </div>
+        <div class="filter-block">
+            <div class="filter-name text-common">
+                <input class="slider" id="slider" type="range" (input)="sliderValueChanged()" min="0" max="100" value="0"/>
+            </div>
+            <div class="filter-body">
+            </div>
+        </div>
+        <div class="filter-block">
+            <div class="filter-name text-common">
+                Язык:
+            </div>
+            <div class="filter-body">
+                <label class="select" for="language">
+                <select (input)="languageChanged($event)" id="language" required="required">
+                    <option value="0">Любой</option>
+                    <option value="1">Русский</option>
+                    <option value="2">Английсский</option>
+                </select>
+                <svg>
+                    <use xlink:href="#select-arrow-down"></use>
+                </svg>
+                </label>
+                <svg class="sprites">
+                    <symbol id="select-arrow-down" viewbox="0 0 10 6">
+                        <polyline points="1 1 5 5 9 1"></polyline>
+                    </symbol>
+                </svg>
+            </div>
+        </div>
+        <div class="filter-block">
+            <div class="filter-name text-common">
+                <st-common-button (clicked)="updateTexts()" [isNormalBg]="true" class="uppercased-and-normal-font">Обновить</st-common-button>
+            </div>
+            <div class="filter-body">
+            </div>
+        </div>
+    </div>
+</div>

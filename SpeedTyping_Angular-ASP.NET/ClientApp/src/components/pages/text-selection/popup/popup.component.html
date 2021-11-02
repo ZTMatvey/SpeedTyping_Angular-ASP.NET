@@ -5,6 +5,7 @@
         <div class="text-selection__close-button" (click)="closePopup()">
             close
         </div>
-        <st-text-selection-settings #textSettings *ngIf="popupView === popupViewType.TextSettings"></st-text-selection-settings>
+        <st-text-selection-settings #textSettings [hidden]="viewType !== 'TextSettings'"></st-text-selection-settings>
+        <st-text-selection-properties [hidden]="viewType !== 'TextSelectProperties'"></st-text-selection-properties>
     </div>
 </div>

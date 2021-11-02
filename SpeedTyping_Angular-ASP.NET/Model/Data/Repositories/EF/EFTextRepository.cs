@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
-using SpeedTyping.Model;
 using SpeedTyping.Model.Data.Repositories.Abstract;
 
 namespace SpeedTyping.Model.Data.Repositories.EF
@@ -11,7 +11,7 @@ namespace SpeedTyping.Model.Data.Repositories.EF
     {
         private readonly ApplicationDbContext context;
         public EFTextRepository(ApplicationDbContext context) => this.context = context;
-        public IQueryable<Text> GetTexts() => context.Texts;
+        public IEnumerable<Text> GetTexts() => context.Texts;
         public Text GetTextById(int id) => context.Texts.FirstOrDefault(x => x.Id == id);
         public Text GetTextByName(string name) => context.Texts.FirstOrDefault(x => x.Title == name);
         public void SaveText(Text text)

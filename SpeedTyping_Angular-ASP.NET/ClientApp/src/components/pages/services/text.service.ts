@@ -1,5 +1,6 @@
 export class TextService{
   partOfContent?: string;
+  language: number = -1;
   constructor(public title: string, public content: string, public id: number, public textSizeId: number = TextSize.Full) {  }
   get contentWithCorrectSize(){
     switch(this.textSizeId)
