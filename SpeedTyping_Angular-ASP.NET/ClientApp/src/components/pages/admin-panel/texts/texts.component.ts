@@ -8,10 +8,10 @@ import { TextsService } from '../../services/texts.service';
   styleUrls: ['../../text-selection/text-selection.component.scss']
 })
 export class TextsComponent  {
-  texts: TextService[];
+  texts?: TextService[];
 
   constructor(textsService: TextsService) {
-    this.texts = textsService.Texts;
+    textsService.getTexts().then(res=> this.texts = res);
   }
 
   addText(title: string, content: string, id: number)
@@ -21,6 +21,6 @@ export class TextsComponent  {
     text.partOfContent = text.content.substring(0, lengthOfPart);
     if(text.content.length > lengthOfPart)
       text.partOfContent += "...";
-    this.texts.push(text);
+    this.texts?.push(text);
   }
 }

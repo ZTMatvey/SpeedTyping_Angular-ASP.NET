@@ -5,6 +5,7 @@
     font-weight: 700;
     font-size: 20px;
     text-align: center;
+    color: var(--text-color);
 }
 .text-selection__button {
     font-family:  $main-font;
@@ -15,6 +16,7 @@
     font-size: 14px;
     margin-top: 5px;
     text-align: center;
+    color: var(--text-color);
 }
 .analytics-btn{
     font-family: $material-font;

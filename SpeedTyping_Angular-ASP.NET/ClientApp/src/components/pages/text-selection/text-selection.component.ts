@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { TextSelectionFilters } from '../services/text-selection-filters';
 import { TextService } from '../services/text.service';
 import { TextsService } from '../services/texts.service';
 import { PopupComponent } from './popup/popup.component';
@@ -16,11 +17,25 @@ export class TextSelectionComponent implements OnInit {
 
   constructor(private textsService: TextsService) { }
   ngOnInit(){
-    this.Texts = this.textsService.Texts;
+    TextSelectionFilters.filtersChanged.subscribe(()=> this.updateTexts());
+    this.updateTexts();
   }
-  openPopup(id: number)
+  updateTexts(){
+    let texts = this.textsService.getTexts().then(res=> {
+      this.Texts = [];
+      res.forEach(element => {
+        let canAdd = TextSelectionFilters.canAdd(element);
+        if(canAdd)
+          this.Texts!.push(element);
+      });
+    });
+  }
+  openPopupForTextSettings(id: number)
   {
     let text = this.Texts?.find(i => i.id === id)!;
-    this.popup?.openPopup(text);
+    this.popup?.openPopupForTextSettings(text);
+  }
+  openPopupForSelectProperties() {
+    this.popup?.openPopupForSelectionProperties();
   }
 }

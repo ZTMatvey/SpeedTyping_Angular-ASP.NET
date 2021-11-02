@@ -1,0 +1,113 @@
+@import "../../../../../variables";
+
+.filter-wrapper {
+}
+.filter-heading{
+    font-family: $headings-font;
+    font-size: 28px;
+    color: var(--text-color);
+    font-weight: 700;
+}
+.filter-blocks {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+}
+.filter-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+.filter-name {
+    font-size: 18px;
+    margin-right: 5px;
+    align-self: start;
+}
+.filter-body {
+}
+.text-common {
+    font-family: $main-font;
+    color: var(--text-color);
+}
+.slider{
+    width: 100%;
+    flex: 0 0 auto;
+    margin-top: 8px;
+    min-width: 150px;
+    appearance: none;
+    outline: none;
+    height: 5px;
+    border-radius: 2px;
+    background-color: var(--sub-bg-color);
+
+    &::-webkit-slider-thumb{
+        appearance: none;
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        background-color: var(--text-color);
+        border-radius: 50%;
+        cursor: grab;
+        position: relative;
+    }
+}
+
+
+
+
+
+.select {
+    position: relative;
+}
+.select svg {
+    position: absolute;
+    right: 12px;
+    top: calc(50% - 3px);
+    width: 10px;
+    height: 6px;
+    stroke-width: 2px;
+    stroke: var(--text-color);
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
+}
+.select select {
+    -webkit-appearance: none;
+    padding: 7px 40px 7px 12px;
+    width: 100%;
+    border: 1px solid var(--text-color);
+    border-radius: 2px;
+    background: var(--bg-color);
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 150ms ease;
+    font-family: $main-font;
+    color: var(--text-color);
+}
+.select select option {
+    color: var(--text-color);
+}
+.select select option[value=""][disabled] {
+    display: none;
+}
+.select select:focus {
+    color: var(--text-color);
+    outline: none;
+    box-shadow: 0 0 2px var(--text-color);
+}
+.select select + svg {
+    stroke: var(--text-color);
+    opacity: .4;
+}
+.select select:hover + svg {
+    opacity: 1;
+}
+.sprites {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    user-select: none;
+}

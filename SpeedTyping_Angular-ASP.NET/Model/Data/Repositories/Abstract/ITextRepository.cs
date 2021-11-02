@@ -1,12 +1,10 @@
-﻿using System;
-using System.Linq;
-using SpeedTyping.Model;
+﻿using System.Collections.Generic;
 
 namespace SpeedTyping.Model.Data.Repositories.Abstract
 {
     public interface ITextRepository
     {
-        IQueryable<Text> GetTexts();
+        IEnumerable<Text> GetTexts();
         Text GetTextById(int id);
         Text GetTextByName(string name);
         void SaveText(Text text);

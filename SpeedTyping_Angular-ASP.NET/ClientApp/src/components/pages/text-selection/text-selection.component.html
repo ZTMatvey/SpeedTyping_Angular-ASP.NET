@@ -3,12 +3,15 @@
         <div class="text-selection__body">
             <div class="text-selection__wrapper">
                 <div class="text-selection__header">
-                    <h2 class="text-selection__heading">
-                        Выберите текст:
-                    </h2>
+                    <span class="heading-block">
+                        <span (click)="openPopupForSelectProperties()" class="tune-icon">tune</span>
+                        <h2 class="text-selection__heading">
+                            Выберите текст:
+                        </h2>
+                    </span>
                 </div>
                 <div class="text-selection__main">
-                    <st-text-card class="text-selection__item" (selected)="openPopup(text.id)" [text]="text" *ngFor="let text of Texts"></st-text-card>
+                    <st-text-card class="text-selection__item" (selected)="openPopupForTextSettings(text.id)" [text]="text" *ngFor="let text of Texts"></st-text-card>
                 </div>
             </div>
         </div>

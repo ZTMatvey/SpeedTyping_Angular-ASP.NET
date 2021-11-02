@@ -2,11 +2,7 @@ import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild }
 import { ThemesDataService } from 'src/themes/themes-data.service';
 import { TextService } from '../../services/text.service';
 import { TextSettingsComponent } from './views/text-settings/text-settings.component';
-
-enum PopupView{
-  TextSettings,
-  TextStatistic
-}
+import { ViewTypes } from './views/view-types';
 
 @Component({
   selector: 'st-text-select-popup',
@@ -14,17 +10,15 @@ enum PopupView{
   styleUrls: ['./popup.component.scss']
 })
 export class PopupComponent {
-  @ViewChild("wrapper", {static: false})
-  wrapper: ElementRef | undefined;
-  @ViewChild("blur", {static: false})
-  blur: ElementRef | undefined;
-  @ViewChild("popup", {static: false})
-  popup: ElementRef | undefined;
-  @ViewChild("textSettings", {static: false})
-  textSettings: TextSettingsComponent | undefined;
-  popupView?: PopupView = PopupView.TextSettings;
-  popupViewType = PopupView;
-
+  @ViewChild("wrapper")
+  wrapper?: ElementRef;
+  @ViewChild("blur")
+  blur?: ElementRef;
+  @ViewChild("popup")
+  popup?: ElementRef;
+  @ViewChild("textSettings")
+  textSettings?: TextSettingsComponent;
+  viewType: ViewTypes = ViewTypes.TextSettings;
   text?: TextService;
   
   popupOpened?: boolean = false;
@@ -36,9 +30,17 @@ export class PopupComponent {
         this.closePopup();
   }
 
-  openPopup(text: TextService){
+  openPopupForTextSettings(text: TextService){
+    this.viewType = ViewTypes.TextSettings;
     this.text = text;
     this.textSettings?.configureTextData(text);
+    this.openPopup();
+  }
+  openPopupForSelectionProperties(){
+    this.viewType = ViewTypes.TextSelectProperties;
+    this.openPopup();
+  }
+  private openPopup() {
     this.popupOpened = true;
     this.wrapper?.nativeElement.classList.remove("popup-hidden");
     this.blur?.nativeElement.classList.remove("blur-screen-disactive");
