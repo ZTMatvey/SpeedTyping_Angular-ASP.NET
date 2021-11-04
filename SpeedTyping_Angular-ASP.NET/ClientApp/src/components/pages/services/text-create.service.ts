@@ -11,8 +11,9 @@ export class TextCreateService {
   private url: string = "/api/AdminPanel/CreateText";
   formModel = this.formBuilder.group({
     Id: [0],
+    LanguageId: [0, Validators.required],
     Title: ['', Validators.required],
-    Content: ['', Validators.required]
+    Content: ['', Validators.required],
   });
 
   constructor(
@@ -26,7 +27,8 @@ export class TextCreateService {
     var body = {
       Title: this.formModel.value.Title,
       Content: this.formModel.value.Content,
-      Id: this.formModel.value.Id
+      Id: this.formModel.value.Id,
+      Language: parseInt(this.formModel.value.LanguageId),
     };
     var token = localStorage.getItem("token");    
     var header = new HttpHeaders({"Authorization": "Bearer " + token});

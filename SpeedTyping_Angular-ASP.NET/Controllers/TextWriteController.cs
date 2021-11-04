@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SpeedTyping.Helper;
 using SpeedTyping.Model.Data;
+using SpeedTyping.Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +33,16 @@ namespace SpeedTyping.Controllers
             model.UserId = userId;
             var bestResult = _dataManager.TextWriteTypeInfos.SaveAndGetBest(model);
             return Ok(bestResult);
+        }
+        [HttpPost]
+        [Authorize]
+        [Route("Remove")]
+        public void RemoveResult(RemoveTextWriteResultViewModel model)
+        {
+                var userId = User.Claims.First(x => x.Type == "UserID").GetUserIdFromClaim();
+                var textResult = _dataManager.TextWriteTypeInfos.GetById(model.Id);
+                if (textResult != null && textResult.UserId == userId)
+                    _dataManager.TextWriteTypeInfos.Remove(textResult);
         }
     }
 }

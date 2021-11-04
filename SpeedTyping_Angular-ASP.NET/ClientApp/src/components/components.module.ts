@@ -29,12 +29,13 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { TextWriteResultComponent } from './pages/text-write-result/text-write-result.component';
 import { ProgressBlockComponent } from "./pages/user-profile/blocks/progress-block/progress-block.component";
 import { TextSelectionPropertiesComponent } from './pages/text-selection/popup/views/text-selection-properties/text-selection-properties.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-    declarations: [ HeaderButtonsComponent, HeaderComponent, TextSelectionComponent, LoginComponent, RegisterComponent, PopupComponent, TextCardComponent, TextWriteComponent, TimerComponent, CpmMeterComponent, TextBoxComponent, TextSettingsComponent, TextStatisticComponent, AdminPanelComponent, TextsComponent, UsersComponent, AdminPanelTextCardComponent, CreateTextComponent, UserProfileComponent, TextWriteResultComponent, ProgressBlockComponent, TextSelectionPropertiesComponent ],
+    declarations: [ HeaderButtonsComponent, HeaderComponent, TextSelectionComponent, LoginComponent, RegisterComponent, PopupComponent, TextCardComponent, TextWriteComponent, TimerComponent, CpmMeterComponent, TextBoxComponent, TextSettingsComponent, TextStatisticComponent, AdminPanelComponent, TextsComponent, UsersComponent, AdminPanelTextCardComponent, CreateTextComponent, UserProfileComponent, TextWriteResultComponent, ProgressBlockComponent, TextSelectionPropertiesComponent, FooterComponent ],
     imports: [ CommonModule, ElementsModule, ThemesModule, RouterModule, ReactiveFormsModule, HttpClientModule, FormsModule ],
     providers: [],
-    exports: [ HeaderComponent ],
+    exports: [ HeaderComponent, FooterComponent ],
 })
 export class ComponentsModule{
 }

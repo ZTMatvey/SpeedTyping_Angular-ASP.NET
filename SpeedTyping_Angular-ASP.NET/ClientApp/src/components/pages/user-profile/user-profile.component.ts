@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { InfoBlock } from './info-block.service';
@@ -23,7 +24,9 @@ export class UserProfileComponent implements AfterViewInit {
   personalizationButton?: ElementRef;
 
   private blocks: InfoBlock[] = [];
-  constructor(readonly user: UserService, readonly router: Router) { }
+  constructor(readonly user: UserService, readonly router: Router, titleService: Title) { 
+    titleService.setTitle(`Провиль пользователя ${user.userName}`);
+  }
   ngAfterViewInit(){
     this.addBlock("Profile", this.profileBlcok!, this.profileButton!, "block");
     this.addBlock("Progress", this.progressBlcok!, this.progressButton!, "block");

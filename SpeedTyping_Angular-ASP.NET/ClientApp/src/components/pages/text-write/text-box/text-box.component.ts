@@ -153,9 +153,15 @@ export class TextBoxComponent implements OnInit {
       this.typeActions?.errorInTextBox();
     }
     if(this.isIncorrectInput && !isCharacterDeleted)
+    {
+      this.typeActions!.newError();
       this.error.emit();
+    }
     if(isLengthMax && isTextBoxValid)
+    {
+      this.typeActions?.newCorrect();
       this.newvalidcharacter.emit();
+    }
   }
   isTextBoxValid(textBoxValue: string): boolean{
     let subStribgedCorrectValue = 
@@ -184,14 +190,14 @@ export class TextBoxComponent implements OnInit {
     this.textBox = <HTMLInputElement>document.getElementById("text-box");
     this.textBox.focus();
   }
-  setupText(text: TextService, actionTypeId: number) {    
+  setupText(text: TextService, actionTypeId: number, textWriteInfo: TextWriteInfo) {    
     switch(actionTypeId) {
       case 2: 
-        this.typeActions = new FreeTypeActions(this.textBox!);
+        this.typeActions = new FreeTypeActions(this.textBox!, textWriteInfo);
         break;
       case 1:
       default:
-        this.typeActions = new NormalTypeActions(this.textBox!);
+        this.typeActions = new NormalTypeActions(this.textBox!, textWriteInfo);
     }
     this.setupLines(text);
     this.currentLineChanged();

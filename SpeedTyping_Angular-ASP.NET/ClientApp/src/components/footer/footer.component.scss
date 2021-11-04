@@ -1,0 +1,80 @@
+@import "../variables";
+@import "../../assets/icofont/icofont.min.css";
+
+.footer {
+    min-height: 5vh;
+    background-color: var(--sub-bg-color);
+    border-top: 1px var(--text-color) solid;
+}
+.footer__body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+.footer__wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.footer__top-part {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+    align-items: center;
+}
+.footer__center-all-rights {
+    color: var(--text-color);
+    font-family: $main-font;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+}
+.footer__links {
+    display: flex;
+    justify-content: center;
+    margin-top: 2px;
+    
+
+    & .footer__link:first-child{
+        margin-left: 0;
+    }
+}
+.footer__link {
+    font-family: icofont,AdobeInvisFont,MyriadPro-Regular;
+    color: var(--text-color);
+    border-radius: 50%;
+    padding: 5px;
+    min-width: 20px;
+    min-height: 20px;
+    border-style: solid;
+    border-width: 1px;
+    margin-left: 10px;
+    font-size: 10px;
+
+    transition: .1s ease;
+    &:hover{
+        color: var(--sub-bg-color);
+        background-color: var(--text-color);
+    }
+}
+.footer__contact-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+.footer__contact-text {
+    font-family: $headings-font;
+    font-weight: 700;
+    color: var(--text-color);
+    font-size: 10px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.footer__logo-img{
+    color: var(--sub-bg-color);
+}

@@ -12,7 +12,7 @@ import { UserService } from 'src/components/pages/services/user.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -23,6 +23,6 @@ import { UserService } from 'src/components/pages/services/user.service';
     HttpClientModule
   ],
   providers: [ UserService ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

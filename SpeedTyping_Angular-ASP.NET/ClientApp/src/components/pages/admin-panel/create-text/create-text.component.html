@@ -18,6 +18,26 @@
                             <st-common-button [isSmall]="true" class="select-btn uppercased-and-normal-font" (clicked)="changeText()">Изменить</st-common-button>
                          </div>
                     </div>
+                    <div class="text-edit__text-wrapper">
+                        <div class="language-block">
+                            <div class="language-text">Язык:</div>
+                            <label class="select" for="language">
+                            <select id="language" formControlName="LanguageId">
+                                <option [ngValue]="0" disabled selected>Выберете язык</option>
+                                <option [ngValue]="1">Русский</option>
+                                <option [ngValue]="2">Английсский</option>
+                            </select>
+                            <svg>
+                                <use xlink:href="#select-arrow-down"></use>
+                            </svg>
+                            </label>
+                            <svg class="sprites">
+                                <symbol id="select-arrow-down" viewbox="0 0 10 6">
+                                    <polyline points="1 1 5 5 9 1"></polyline>
+                                </symbol>
+                            </svg>
+                        </div>
+                    </div>
                     <st-common-button [isNormalBg]="true" (clicked)="onSubmitBtnClick()" class="save-btn uppercased-and-normal-font">Сохранить</st-common-button>
                 </form>
             </div>

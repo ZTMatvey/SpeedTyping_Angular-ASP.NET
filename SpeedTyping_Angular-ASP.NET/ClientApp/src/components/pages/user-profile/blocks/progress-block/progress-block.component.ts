@@ -68,6 +68,9 @@ export class ProgressBlockComponent implements OnInit, AfterViewInit {
       r.group.sort(this.compareBySizeId);
     });
   }
+  removeTextWriteInfo(id: string) {
+    this.userService.removeTextWriteInfo(id);
+  }
   compareBySizeId( a: TextWriteInfo, b:TextWriteInfo ) {
     if ( a.textSize < b.textSize ){
       return -1;

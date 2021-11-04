@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { TextSelectionFilters } from '../services/text-selection-filters';
 import { TextService } from '../services/text.service';
 import { TextsService } from '../services/texts.service';
@@ -15,7 +16,8 @@ export class TextSelectionComponent implements OnInit {
   popup: PopupComponent | undefined;
   Texts?: TextService[];
 
-  constructor(private textsService: TextsService) { }
+  constructor(private textsService: TextsService, titleService: Title) { 
+    titleService.setTitle("Выбор текста"); }
   ngOnInit(){
     TextSelectionFilters.filtersChanged.subscribe(()=> this.updateTexts());
     this.updateTexts();

@@ -10,6 +10,7 @@ export class UserService {
   private url = "/api/Account/UserInfo";
   private allTextWriteResultsUrl = "/api/Account/AllTextWriteResults";
   private updateResultUrl = "/api/TextWrite/UpdateResult";
+  private removeResultUrl = "/api/TextWrite/Remove";
   userName: string = "";
   private _isAuthorized: boolean | null = null;
   data?: User;
@@ -77,6 +78,12 @@ export class UserService {
     
     let header = this.authHeaders;
     return this.http.post<TextWriteInfo>(this.updateResultUrl, textWriteInfo, { headers: header }).toPromise();
+  }
+  removeTextWriteInfo(id: string) {
+    
+    let header = this.authHeaders;
+    let body = { id }
+    this.http.post(this.removeResultUrl, body, { headers: header }).subscribe();
   }
   private get authHeaders()
   {

@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TextService } from 'src/components/pages/services/text.service';
 import { ThemesDataService } from 'src/themes/themes-data.service';

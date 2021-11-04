@@ -1,4 +1,5 @@
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ThemesDataService } from 'src/themes/themes-data.service';
 import { TextService } from '../services/text.service';
@@ -30,7 +31,9 @@ export class TextWriteComponent implements AfterViewInit, OnInit {
     readonly themesData: ThemesDataService, 
     readonly route: ActivatedRoute,
     readonly textsService: TextsService,
-    readonly router: Router) {  }
+    readonly router: Router, 
+    private titleService: Title) { 
+      titleService.setTitle("Печать текста"); }
   lineChanged(newLine: any){
     this.currentLine = newLine;
   } 
@@ -39,11 +42,9 @@ export class TextWriteComponent implements AfterViewInit, OnInit {
     this.cpmMeter?.startCpmMeter(); 
   }
   newCorrectCharacter() {
-    this.textWriteInfo!.correctCharsCount++;
     this.cpmMeter?.addCorrect();
   }
   error(){
-    this.textWriteInfo!.errorCharsCount++;
   }
   stopAll()
   {
@@ -60,9 +61,9 @@ export class TextWriteComponent implements AfterViewInit, OnInit {
       textId = params["textId"];
     });
     if(textId)
-    {
       this.textsService.getTextById(textId).then((text)=> this.checkText(text));
-    }
+    else
+      this.router.navigateByUrl("");
   }
   checkText(text: TextService | null) {
     let textIsValid = 
@@ -82,10 +83,11 @@ export class TextWriteComponent implements AfterViewInit, OnInit {
       actionTypeId = actionTypeId === null || actionTypeId === undefined ? '1' : actionTypeId;
       let numTextSize = parseInt(textSizeId);
       let numActionTypeId = parseInt(actionTypeId);
+      this.titleService.setTitle(`Печать текста ${text?.title}`);
 
       this.textWriteInfo = new TextWriteInfo(text!.id, numTextSize, numActionTypeId);
       this.configureText(text!, numTextSize);
-      this.textBox?.setupText(text!, numActionTypeId);
+      this.textBox?.setupText(text!, numActionTypeId, this.textWriteInfo);
     }
     else
       this.toHomePage();

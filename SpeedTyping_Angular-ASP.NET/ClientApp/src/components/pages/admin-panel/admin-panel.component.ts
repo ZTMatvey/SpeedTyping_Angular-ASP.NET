@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ThemesDataService } from 'src/themes/themes-data.service';
 
 @Component({
@@ -8,5 +9,7 @@ import { ThemesDataService } from 'src/themes/themes-data.service';
 })
 export class AdminPanelComponent {
 
-  constructor(readonly themesData: ThemesDataService) { }
+  constructor(readonly themesData: ThemesDataService, titleService: Title) { 
+    titleService.setTitle("Панель администратора");
+  }
 }

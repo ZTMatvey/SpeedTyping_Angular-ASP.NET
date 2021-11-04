@@ -13,6 +13,7 @@ namespace SpeedTyping.Model.Data.Repositories.Abstract
         public void Add(TextWriteInfo info);
         TextWriteInfo SaveAndGetBest(TextWriteInfo info);
         public TextWriteInfo GetById(int id);
+        public void Remove(TextWriteInfo id);
         public IEnumerable<TextWriteInfo> GetAllByUserId(string id);
     }
 }

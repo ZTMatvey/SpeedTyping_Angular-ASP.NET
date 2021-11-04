@@ -6,6 +6,6 @@
             close
         </div>
         <st-text-selection-settings #textSettings [hidden]="viewType !== 'TextSettings'"></st-text-selection-settings>
-        <st-text-selection-properties [hidden]="viewType !== 'TextSelectProperties'"></st-text-selection-properties>
+        <st-text-selection-properties [popupBody]="this" [hidden]="viewType !== 'TextSelectProperties'"></st-text-selection-properties>
     </div>
 </div>

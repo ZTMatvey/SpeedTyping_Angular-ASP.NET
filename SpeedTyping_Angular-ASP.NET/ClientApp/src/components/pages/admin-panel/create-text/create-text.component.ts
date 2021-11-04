@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { TextCreateService } from '../../services/text-create.service';
 import { TextsService } from '../../services/texts.service';
@@ -21,9 +22,10 @@ export class CreateTextComponent implements OnInit {
   constructor(
     public textCreateService: TextCreateService, 
     private route: ActivatedRoute,
-    private textsService: TextsService) {  }
+    private textsService: TextsService, private titleService: Title) {  }
   onSubmit(){
-    this.textCreateService.create()?.subscribe(resp=> this.textsService.update());
+    this.textCreateService.create()?.subscribe(()=> this.textsService.update());
+    
   }
   onSubmitBtnClick(){
     this.form?.onSubmit(undefined!);
@@ -62,12 +64,23 @@ export class CreateTextComponent implements OnInit {
           Title: text!.title,
           Content: text!.content,
           Id: text!.id,
+          LanguageId: text!.language
         });
         this.oldName = text!.title;
+        this.titleService.setTitle(`Редактирование текста ${this.oldName}`);
         if(!text)
           return;
       });
     }
-    else return;
+    else
+    {
+        this.textCreateService.formModel.setValue({
+        Title: "",
+        Content: "",
+        Id: 0,
+        LanguageId: 2
+      });
+      this.titleService.setTitle("Добавить новый текст");
+    }
   }
 }

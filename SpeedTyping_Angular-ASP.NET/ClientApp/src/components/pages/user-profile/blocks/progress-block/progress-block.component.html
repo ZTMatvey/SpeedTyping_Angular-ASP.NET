@@ -27,22 +27,34 @@
         <div class="personal-accout__concrete-text-statistics"  *ngFor="let result of resultsGroup.group">
             <div class="personal-accout__concrete-text-name">
                 {{textsServise.getTextSizeNameById(result.textSize)}} ({{result.countOfAllChars}})
+                <st-common-tooltip [helpMessage]="'Напечатано 20 или более раз'" *ngIf="result.completedCount >= 20" class="common-badge-wrapper">
+                    <span *ngIf="result.cpm >= 300" class="star-icon common-badge">star</span>
+                </st-common-tooltip>
+                <st-common-tooltip [helpMessage]="'CPM больше или равен 300'" *ngIf="result.cpm >= 300" class="common-badge-wrapper">
+                    <span *ngIf="result.cpm >= 300" class="timer-icon common-badge">timer</span>
+                </st-common-tooltip>
+                <st-common-tooltip [helpMessage]="'0 ошибок'" *ngIf="result.errorCharsCount === 0">
+                    <span class="no-errors common-badge">error</span>
+                </st-common-tooltip>
             </div>
             <div class="personal-accout__statistics-items">
                 <div class="personal-accout__statistics-item">
                     Напечатано раз: {{result.completedCount}}
                 </div>
                 <div class="personal-accout__statistics-item">
-                    Лучшее CPM: {{result.cpm}}
+                    Лучшее время: {{textWiteInfoType.time(result)}} ({{result.cpm | number:'1.1-2'}} CPM)
                 </div>
                 <div class="personal-accout__statistics-item">
-                    Лучшее время: {{textWiteInfoType.time(result)}}
+                    Лучший процент ошибок: {{textWiteInfoType.percentOfErrors(result) | number:'1.1-2'}}
                 </div>
                 <div class="personal-accout__statistics-item">
-                    Лучший процент ошибок: {{textWiteInfoType.percentOfErrors(result)}}
+                    Лучший процент введенных верно: {{textWiteInfoType.percentOfCorrects(result) | number:'1.1-2'}}
+                </div>
+                <div class="personal-accout__statistics-item">
+                    Лучший процент неисправленных ошибок: {{textWiteInfoType.percentOfUnfixedErrors(result) | number:'1.1-2'}}
                 </div>
             </div>
-            <st-common-button class="button" [isSmall]="true">Очистить</st-common-button>
+            <st-common-button (clicked)="removeTextWriteInfo(result.id)" class="button" [isSmall]="true">Очистить</st-common-button>
         </div>
     </div>
 </div>

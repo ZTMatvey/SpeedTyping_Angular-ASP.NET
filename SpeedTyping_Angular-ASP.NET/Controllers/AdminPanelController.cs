@@ -34,7 +34,8 @@ namespace SpeedTyping.Controllers
             {
                 TextContent = model.Content,
                 Title = model.Title,
-                Id = model?.Id ?? default
+                Id = model?.Id ?? default,
+                Language = model.Language
             };
             _dataManager.Texts.SaveText(text);
             return Ok();

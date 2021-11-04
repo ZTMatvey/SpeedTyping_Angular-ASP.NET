@@ -196,6 +196,8 @@
     color: var(--text-color);
     font-size: 18px;
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
 }
 .personal-accout__statistics-items {
     display: flex;
@@ -253,4 +255,22 @@
         background-color: var(--text-color);
         color: var(--sub-bg-color);
     }
+}
+
+.star-icon{
+    color: #ff5722;
+}
+.timer-icon{
+    color: #ffd700;
+}
+.no-errors{
+    color: #64dd17;
+}
+.common-badge{
+    font-family: $material-font;
+    font-size: 18px;
+    user-select: none;
+}
+.common-badge-wrapper{
+    display: flex;
 }

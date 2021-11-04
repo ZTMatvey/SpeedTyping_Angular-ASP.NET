@@ -21,8 +21,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom-left-radius: 0;
+}
+.normal-image{
     border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.inversed-image{
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 .logo__text {
     padding-left: 5px;

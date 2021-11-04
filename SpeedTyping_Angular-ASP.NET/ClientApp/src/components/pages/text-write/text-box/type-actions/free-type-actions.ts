@@ -1,15 +1,19 @@
+import { TextWriteInfo } from "src/components/pages/text-write-result/text-write-info";
 import { ITypeActions } from "./abstract-type-actions";
 
 export class FreeTypeActions implements ITypeActions {
-    constructor(private textBox: HTMLInputElement) {  }
+    constructor(private textBox: HTMLInputElement, public textWriteInfo: TextWriteInfo) {  }
     newError(): void {
-        
+      this.textWriteInfo.errorCharsCount++;
     }
     newCorrect(): void {
-        
+      this.textWriteInfo.correctCharsCount++;
     }
     canUpdateLine(normalLine: string, currentLine: string): boolean {
-        return true;
+      for(let i = 0; i < currentLine.length; i++)
+        if(normalLine.length < i || currentLine[i] !== normalLine[i])
+          this.textWriteInfo.unfixedErrorsCount++;
+      return true;
     }
     errorInTextBox() {}
     allErrorsFixed() {}

@@ -9,7 +9,8 @@ export class TextWriteInfo {
     public completedCount = 0;
     public cpm = 0;
 
-    unfixedErrorsCount: number = 0;
+    unfixedErrorsCount = 0;
+    id = '0';
 
     updateCpm() {
         this.cpm = this.countOfAllChars / (this.miliseconds / 60000);
@@ -29,6 +30,9 @@ export class TextWriteInfo {
     }
     public static percentOfErrors(textWriteInfo: TextWriteInfo){
         return textWriteInfo.errorCharsCount / textWriteInfo.countOfAllChars * 100;
+    }
+    public static percentOfUnfixedErrors(textWriteInfo: TextWriteInfo){
+        return textWriteInfo.unfixedErrorsCount / textWriteInfo.countOfAllChars * 100;
     }
     public static percentOfCorrects(textWriteInfo: TextWriteInfo){
         return textWriteInfo.correctCharsCount / textWriteInfo.countOfAllChars * 100;

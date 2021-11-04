@@ -54,5 +54,10 @@ namespace SpeedTyping.Model.Data.Repositories.EF
             => context.TextWriteTypeInfos.Where(x => x.UserId == id);
         public TextWriteInfo GetById(int id) 
             => context.TextWriteTypeInfos.FirstOrDefault(x => x.Id == id);
+        public void Remove(TextWriteInfo info)
+        {
+            context.TextWriteTypeInfos.Remove(info);
+            context.SaveChanges();
+        }
     }
 }

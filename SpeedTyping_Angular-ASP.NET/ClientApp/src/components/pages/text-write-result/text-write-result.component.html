@@ -10,14 +10,17 @@
                     Количество верных вводов: {{textWriteInfo.lastTextInfo?.correctCharsCount}} ({{textWriteInfo.percentOfCorrects(textWriteInfo.lastTextInfo!) | number:'1.1-2'}}%)<span class="text-write__info" *ngIf="bestInfo"> - Лучшее: {{bestInfo!.correctCharsCount}} ({{textWriteInfo.percentOfCorrects(bestInfo!) | number:'1.1-2'}}%)</span>
                 </div>
                 <div class="text-write__info">
+                    Количество неисправленных ошибок: {{textWriteInfo.lastTextInfo?.unfixedErrorsCount}} ({{textWriteInfo.percentOfUnfixedErrors(textWriteInfo.lastTextInfo!) | number:'1.1-2'}}%)<span class="text-write__info" *ngIf="bestInfo"> - Лучшее: {{bestInfo!.unfixedErrorsCount}} ({{textWriteInfo.percentOfUnfixedErrors(bestInfo!) | number:'1.1-2'}}%)</span>
+                </div>
+                <div class="text-write__info">
                     CPM: {{textWriteInfo.lastTextInfo?.cpm | number:'1.1-2'}}<span class="text-write__info" *ngIf="bestInfo"> - Лучшее: {{bestInfo!.cpm | number:'1.1-2'}}</span>
                 </div>
                 <div class="text-write__info">
                     Время: {{textWriteInfo.time(textWriteInfo.lastTextInfo!)}}<span class="text-write__info" *ngIf="bestInfo"> - Лучшее: {{textWriteInfo.time(bestInfo!)}}</span>
                 </div>
                 <div class="text-write__buttons">
-                    <st-common-button [isNormalBg]="true" class="text-write__button uppercased-and-normal-font">На главную</st-common-button>
-                    <st-common-button [isNormalBg]="true" [isSmall]="true" class="text-write__button uppercased-and-normal-font">Повторить</st-common-button>
+                    <st-link-button [link]="''" [isNormalBg]="true" class="text-write__button uppercased-and-normal-font">На главную</st-link-button>
+                    <st-common-button (clicked)="repeat()" [isNormalBg]="true" [isSmall]="true" class="text-write__button uppercased-and-normal-font">Повторить</st-common-button>
                 </div>
             </div>
         </div>
